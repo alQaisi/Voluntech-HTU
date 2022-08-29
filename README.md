@@ -1,4 +1,4 @@
-<!-- [![Netlify Status](https://api.netlify.com/api/v1/badges/eb026c67-ffd9-45bc-8757-82a8e604e261/deploy-status)](https://app.netlify.com/sites/voluntech/deploys) -->
+[![Netlify Status](https://api.netlify.com/api/v1/badges/eb026c67-ffd9-45bc-8757-82a8e604e261/deploy-status)](https://app.netlify.com/sites/voluntech/deploys)
 
 # Introduction
 
