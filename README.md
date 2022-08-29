@@ -1,5 +1,47 @@
 <!-- [![Netlify Status](https://api.netlify.com/api/v1/badges/eb026c67-ffd9-45bc-8757-82a8e604e261/deploy-status)](https://app.netlify.com/sites/voluntech/deploys) -->
 
+# Introduction
+
+the platform allows fresh graduates/career
+changers to kick off their careers and increase their confidence in their skills by volunteering
+in tech activities and helping Non-Profit companies and influence the local community.
+Organizations.
+
+# Voluntech has two stakeholders
+
+## 1) NGO Companies:
+a. Can register to the platform their company profile (Email address, Password, Logo,
+Company Name, Phone Number, Type {NGO, Government, Religious}, Website URL)
+
+
+b. Can post new Volunteering Activity (Name, Description of the activity, Skills required,
+Start Date, End Date, Number of technologists required, Attachments (bonus))
+
+
+c. Can view the past Volunteering activities, and applicants (and approve them)
+
+
+d. Can view volunteers and filter on their skills and their city
+
+
+e. Can view company profile and edit it
+
+
+## 2) Technologists (Fresh graduates)
+a. Can Register to the platform (Full Name, Email Address, Password, Phone Number,
+City, Skills, Job Experiences, Courses, Available times)
+
+
+b. Can view volunteering activities and filter on (Company Name, type, Skills, Date)
+
+
+c. Can apply to volunteering activity and set their (available start and end date, why
+they are applying to that activity, what they can volunteer in)
+
+
+d. Can view & edit their profile (Information, Applied Activities)
+Future Work: (Rating for volunteers, automatic matching, Realtime chat between volunteers and
+applicants)
 
 # Getting Started with Create React App
 
