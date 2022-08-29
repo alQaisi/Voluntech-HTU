@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;500&display=swap');
+html,body{
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  position: relative;
+  font-size: 16px;
+}
+*{
+  box-sizing: border-box;
+  font-family: 'Asap', sans-serif;
+}
+body {
+  height: 100%;
+  min-height: 100vh;
+  background-color: white;
+}
+.particles{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
