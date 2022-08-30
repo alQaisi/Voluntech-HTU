@@ -15,7 +15,12 @@ const Icon=css`
         }
     }
 `;
-
+export const PageNumber=styled.span`
+    font-weight: 500;
+    font-size: 1.15rem;
+    color: black;
+    opacity:.85;
+`
 export const Next=styled(GrFormNext)`
     ${Icon};
 `;
@@ -28,4 +33,5 @@ export const Container=styled.div`
     max-width:350px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
