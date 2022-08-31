@@ -1,11 +1,12 @@
 import { Outlet,useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, Fragment } from 'react';
 import { UserContext } from '../../context/user.context';
 import { UserMenuContext } from '../../context/UserMenu.context';
 import UserMenu from '../userMenu/userMenu.component';
 import { Hero,Logo,AppBar,UserNav,ProfileTitle,Avatar,MenuIcon,CloseMenuIcon} from './header.styles';
 import Link from '../link/link.component';
 import AppMenu from '../AppMenu/AppMenu.component';
+import Footer from '../footer/footer.component';
 
 function Header(){
     const {menuStatus,toggleMenu}=useContext(UserMenuContext);
@@ -16,7 +17,7 @@ function Header(){
 
     const navigate=useNavigate();
     return(
-        <>
+        <Fragment>
             <AppBar>
                 <Logo onClick={()=>navigate("/")}/>
                 <UserNav>
@@ -36,7 +37,8 @@ function Header(){
                 <AppMenu/>
             </Hero>
             <Outlet/>
-        </>
+            <Footer/>
+        </Fragment>
     )
 }
 export default Header;
