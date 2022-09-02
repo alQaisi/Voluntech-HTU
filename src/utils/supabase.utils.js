@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 export const supabase = createClient(
-    process.env.API_URL,
-    process.env.API_KEY
+    process.env.REACT_APP_API_URL,
+    process.env.REACT_APP_API_KEY
 );
 export async function signIn({email,password}){
     const { user, session, error } = await supabase.auth.signIn({
