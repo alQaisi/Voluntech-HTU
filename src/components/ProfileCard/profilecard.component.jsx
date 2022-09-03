@@ -1,8 +1,9 @@
 import { Container,Half1,Half2,ProfileImage,ProfileLink } from "./profilecard.styles";
-import Skill from "../skill/skill.component"
+import Skill from "../skill/skill.component";
+import { Children } from "react";
 function ProfileCard({id,data}){
     const {fName,lName,phone,skills,imagePath,city}=data;
-    const skillsItems=skills.map((skill,index)=><Skill key={index}>{skill}</Skill>)
+    const skillsItems=Children.toArray(skills.map(skill=><Skill>{skill}</Skill>));
     return(
         <ProfileLink to={`/profiles/${id}`} target="_blank" rel="noopener noreferrer">
             <Container>
