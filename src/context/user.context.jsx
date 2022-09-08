@@ -9,6 +9,7 @@ function UserProvider({children}){
     const [user,setUser]=useState();
     const [imageUrl,setImageUrl]=useState();
     const [errorMessage,setErrorMessage]=useState();
+    const [notification,setNotification]=useState();
     
     useEffect(()=>{
         const session = supabase.auth.session();
@@ -22,6 +23,35 @@ function UserProvider({children}){
             listener?.unsubscribe()
         }
     },[]);
+    
+    useEffect(()=>{
+        if(user){
+            if(user.user_metadata.type==="user"){
+                supabase
+                .from(`applicants:uid=eq.${user.id}`)
+                .on("*",(payload)=>{
+                    if(payload.eventType==="DELETE")
+                        return setNotification({type:"delete",message:"A company has not selected your application \n refresh your dashboard to see the updates"});
+                    if(payload.eventType==="UPDATE")
+                        return setNotification({type:"normal",message:`A company has selected your application \n refresh your dashboard to see the updates`});
+                }).subscribe();
+            }
+            if(user.user_metadata.type==="company"){
+                supabase
+                .from(`applicants:cid=eq.${user.id}`)
+                .on("*",(payload)=>{
+                    if(payload.eventType==="DELETE")
+                        return setNotification({type:"delete",message:"A user has canceld their application \n refresh your activity page to see the updates"});
+                    if(payload.eventType==="INSERT")
+                        return setNotification({type:"normal",message:`A user has applyed to one of your activities \n refresh your activity page to see the updates`});
+                }).subscribe();
+            }
+        }
+        return ()=>{
+            supabase.removeAllSubscriptions();
+        }
+    },[user])
+
     async function signIn(userInfo){
         try{
             setOuterLoadingType("white");
@@ -72,7 +102,8 @@ function UserProvider({children}){
         },
         updateProfile,
         user,imageUrl,setImageUrl,errorMessage,setErrorMessage,
-        OuterLoadingType,setOuterLoadingType
+        OuterLoadingType,setOuterLoadingType,
+        notification,setNotification
     }
     return(
         <UserContext.Provider value={value}>{children}</UserContext.Provider>
