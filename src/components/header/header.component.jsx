@@ -7,15 +7,17 @@ import { Hero,Logo,AppBar,UserNav,ProfileTitle,Avatar,MenuIcon,CloseMenuIcon} fr
 import Link from '../link/link.component';
 import AppMenu from '../AppMenu/AppMenu.component';
 import Footer from '../footer/footer.component';
+import Notification from '../Notification/notification.component';
 
 function Header(){
     const {menuStatus,toggleMenu}=useContext(UserMenuContext);
-    const {user,imageUrl,signOut}=useContext(UserContext);
+    const {user,imageUrl,signOut,notification,setNotification}=useContext(UserContext);
     
     const defaultImag="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/1200px-Breezeicons-actions-22-im-user.svg.png";
     const userImage=user && `https://nrhsumqatauurhjsswzq.supabase.co/storage/v1/object/public/avatars/${user.user_metadata.imagePath}`
 
     const navigate=useNavigate();
+
     return(
         <Fragment>
             <AppBar>
@@ -37,6 +39,7 @@ function Header(){
                 <AppMenu/>
             </Hero>
             <Outlet/>
+            <Notification notification={notification} closeNotification={()=>setNotification()}/>
             <Footer/>
         </Fragment>
     )
