@@ -39,6 +39,7 @@ function ApplyToActivity({toggleApply,imagePath,applyToActivity}){
                 <DatePicker
                     className="datePicker"
                     placeholderText="Select Available Date"
+                    minDate={new Date()}
                     selectsRange={true}
                     startDate={startDate}
                     endDate={endDate}

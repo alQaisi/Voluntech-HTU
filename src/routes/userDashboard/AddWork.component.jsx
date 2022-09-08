@@ -34,6 +34,7 @@ function AddWork({toggleAddWork,updateWorkExperience,workExp}){
                     className="datePicker"
                     placeholderText="Select Date"
                     selectsRange={true}
+                    maxDate={new Date()}
                     startDate={startDate}
                     endDate={endDate}
                     onChange={(update) => {

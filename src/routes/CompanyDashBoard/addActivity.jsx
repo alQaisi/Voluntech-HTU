@@ -54,6 +54,7 @@ function AddActivity({toggleAddActivity,addActivity}){
                 <DatePicker
                     className="datePicker"
                     placeholderText="Select Date"
+                    minDate={new Date()}
                     selectsRange={true}
                     startDate={startDate}
                     endDate={endDate}
