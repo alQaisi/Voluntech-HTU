@@ -2,10 +2,8 @@ import {Container,UserAvatar,UserType,UserName,UserBreif,Website,Email} from "./
 import { useParams,useNavigate } from 'react-router-dom';
 import { useContext,useEffect, Fragment, Children } from "react";
 import { ProfileContext } from "../../context/profile.context";
-import Skill from "../../components/skill/skill.component";
-import Button from "../../components/button/button.component";
 import useDocumentTitle from "../../utils/useDocumentTitle";
-import WorkExperience from "../../components/workExperience/workExperience.component";
+import { Skill, Button, WorkExperience } from "../../components";
 
 function Profile(){
     const {profile,getProfile}=useContext(ProfileContext);

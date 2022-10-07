@@ -1,7 +1,7 @@
 import CompanySignUp from "../../ContextComponentSelectors/CompanySignUP.component";
 import UserSignUp from "../../ContextComponentSelectors/UserSignUP.component";
 import { Routes,Route,Navigate } from "react-router-dom";
-import {Component} from "./Component";
+import { Component } from "./Component";
 import useDocumentTitle from "../../utils/useDocumentTitle";
 
 function SignUp(){

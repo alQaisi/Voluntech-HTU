@@ -5,10 +5,8 @@ import { UserContext } from "../../context/user.context";
 import { getApplicants as getApplicantsHelper, getActivity as getActivityHelper, deleteUserActivity as deleteApplicantHelper, ApproveApplicant as ApproveApplicantHelper, toggleActivity as toggleActivityHelper } from "../../utils/supabase.utils";
 import { TechnologistsIcon,CityIcon } from "../../components/Activity/activity.styles";
 import { Container,Logo,Title,ActivityBreif,IconCont } from "../Activity/Activity.styles";
-import Skill from "../../components/skill/skill.component";
 import useDocumentTitle from "../../utils/useDocumentTitle";
-import Button from "../../components/button/button.component";
-import Applicant from "../../components/applicant/applicant.component";
+import { Skill, Button, Applicant } from "../../components";
 
 function ManageActivity(){
     const { actId } =useParams();

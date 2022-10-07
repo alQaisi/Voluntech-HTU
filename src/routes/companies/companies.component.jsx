@@ -1,12 +1,9 @@
 import { Container } from './companies.styles';
 import { useContext,Children } from "react";
 import { CompaniesContext } from '../../context/Companies.context';
-import CompanyCard from '../../components/CompanyCard/CompanyCard.component';
-import Input from "../../components/input/Input.component"
-import Select from "../../components/Select/Select.component";
+import { CompanyCard, Input, Select, WithLoading } from "../../components";
 import Pagination from '../../components/pagination/pagination.component';
 import useDocumentTitle from '../../utils/useDocumentTitle';
-import WithLoading from '../../components/withLoading/WithLoading';
 
 function Companies(){
     const {companies,typeFilter,onTypeChange,searchFilter,onSearchFieldChange,isError}=useContext(CompaniesContext);

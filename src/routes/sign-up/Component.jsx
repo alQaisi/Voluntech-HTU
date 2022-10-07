@@ -1,6 +1,6 @@
 import {SignUpCont,SignType,UserIcon,CompanyIcon} from './signup.styles';
 import { useNavigate } from 'react-router';
-import AuthPagesLogo from '../../components/AuthPagesLogo/AuthPagesLogo.component';
+import { AuthPagesLogo } from "../../components";
 
 export function Component(){
     const navigate=useNavigate();

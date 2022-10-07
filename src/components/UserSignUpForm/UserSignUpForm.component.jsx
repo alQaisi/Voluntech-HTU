@@ -1,15 +1,8 @@
 import { useContext } from 'react';
 import { UserSignUpContext } from '../../context/UserSignUp.context';
-import {FormCont,Container} from './UserSignUpForm.styles';
-import Input from '../input/Input.component';
-import AvatarUpload from '../AvatarUpload/AvatarUpload.component';
-import CheckBox from '../CheckBox/CheckBox.component';
-import Select from '../Select/Select.component';
+import { FormCont,Container } from './UserSignUpForm.styles';
+import { Input, AvatarUpload, CheckBox, Select, TextArea, AuthPagesLogo, Link } from "../";
 import Cities from '../../assets/cities.json';
-import TextArea from '../TextArea/textarea.component';
-import AuthPagesLogo from '../../components/AuthPagesLogo/AuthPagesLogo.component';
-import Link from "../../components/link/link.component";
-
 
 function UserSignUpForm(){
     const {userValues,handleFormSubmission,handleCitySelection,handleInputChange,handleSkillsSelection,handleAvatarChange}=useContext(UserSignUpContext);

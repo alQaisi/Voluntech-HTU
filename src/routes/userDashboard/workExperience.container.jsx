@@ -1,7 +1,7 @@
 import Button from "../../components/button/button.component";
 import { Fragment, useState, useContext } from "react";
 import { UserUpdateContext } from "../../context/userUpdateContext";
-import WorkExperience from "../../components/workExperience/workExperience.component";
+import { WorkExperience } from "../../components";
 import AddWork from "./AddWork.component";
 
 function WorkExperienceCont(){

@@ -1,9 +1,6 @@
 import { AddWorkCont,CloseIcon } from "../userDashboard/userDashboard.styles";
-import Input from "../../components/input/Input.component";
-import TextArea from '../../components/TextArea/textarea.component';
-import DatePicker from "react-datepicker";
+import { Input, TextArea, Select, DatePicker } from "../../components";
 import Cities from '../../assets/cities.json';
-import Select from '../../components/Select/Select.component';
 import "react-datepicker/dist/react-datepicker.css";
 import { useState,useEffect } from "react";
 

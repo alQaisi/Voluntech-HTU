@@ -1,10 +1,6 @@
 import { HomeCont,MainHeading,MainText,GridMenu,GridItem } from './home.styles';
 import { Children } from 'react';
-import mobile from '../../assets/mobile.jpg';
-import websites from '../../assets/websites.jpg';
-import hardware from '../../assets/hardware.jpg';
-import data from '../../assets/data.jpg';
-import design from '../../assets/design.jpg';
+import { mobile, websites, hardware, data, design } from "../../assets";
 import { useNavigate } from "react-router-dom";
 function Home(){
     let navigate = useNavigate();

@@ -1,5 +1,4 @@
-import CheckBox from "../CheckBox/CheckBox.component";
-import Select from "../Select/Select.component";
+import { CheckBox, Select } from "../";
 import Cities from '../../assets/cities.json';
 import { Container } from "./Filter.styles";
 

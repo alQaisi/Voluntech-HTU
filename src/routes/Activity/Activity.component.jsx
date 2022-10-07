@@ -1,12 +1,10 @@
 import { Container,Logo,Title,ActivityBreif,IconCont } from "./Activity.styles";
-import Button from "../../components/button/button.component";
+import { Button, Link, Skill } from "../../components";
 import { useParams,useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState, Fragment } from "react";
 import useDocumentTitle from "../../utils/useDocumentTitle";
 import { TechnologistsIcon,CityIcon } from "../../components/Activity/activity.styles";
 import { ActivityContext } from "../../context/Activity.context";
-import Skill from "../../components/skill/skill.component";
-import Link from "../../components/link/link.component";
 import ApplyToActivity from "./ApplytoActivity.component";
 
 function Activity(){

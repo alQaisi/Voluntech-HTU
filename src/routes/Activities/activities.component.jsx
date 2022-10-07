@@ -1,12 +1,9 @@
 import { Container } from './activities.styles';
 import { useContext,Children } from "react";
 import { ActivitesContext } from '../../context/Activities.context';
-import Activity from "../../components/Activity/activity.component";
-import Input from "../../components/input/Input.component"
-import Select from "../../components/Select/Select.component";
+import { Activity, Input, Select, WithLoading } from "../../components";
 import Pagination from '../../components/pagination/pagination.component';
 import useDocumentTitle from '../../utils/useDocumentTitle';
-import WithLoading from '../../components/withLoading/WithLoading';
 import Cities from '../../assets/cities.json';
 
 function Activities(){

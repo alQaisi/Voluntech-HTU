@@ -1,7 +1,7 @@
 import { useState,useEffect,useContext } from 'react';
-import {Container} from './AvatarUpload.styles';
-import Input from '../input/Input.component';
-import {UserContext} from "../../context/user.context";
+import { Container } from './AvatarUpload.styles';
+import { Input } from '../';
+import { UserContext } from "../../context/user.context";
 
 function AvatarUpload({onChange,bigSize=false,defaultImage}){
     const {setImageUrl,user}=useContext(UserContext);

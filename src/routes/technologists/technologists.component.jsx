@@ -1,11 +1,9 @@
 import { useContext,Children } from "react";
 import { Container } from './technologists.styles';
-import ProfileCard from '../../components/ProfileCard/profilecard.component';
 import { TechnologistsContext } from "../../context/Technologists.context";
-import Filter from '../../components/filter/Filter.component';
 import Pagination from "../../components/pagination/pagination.component";
 import useDocumentTitle from "../../utils/useDocumentTitle";
-import WithLoading from '../../components/withLoading/WithLoading';
+import { ProfileCard, Filter, WithLoading } from "../../components";
 
 function Technologists(){
     const {FilterdProfiles,isError,technologists,cityFilter,skillFilter,onSkillChange,onCityChange}=useContext(TechnologistsContext);

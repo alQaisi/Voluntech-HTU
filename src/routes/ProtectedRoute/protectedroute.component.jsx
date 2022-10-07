@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import { UserContext } from "../../context/user.context";
 import { Navigate } from "react-router-dom";
-import OuterLoading from '../../components/OuterLoading/OuterLoading.component'
+import { OuterLoading } from '../../components'
 
 function ProtectedRoute({children}){
     const {user}=useContext(UserContext); 

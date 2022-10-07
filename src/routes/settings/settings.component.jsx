@@ -2,12 +2,8 @@ import {useContext} from "react";
 import { UserContext } from '../../context/user.context.jsx';
 import { UserUpdateContext } from '../../context/userUpdateContext';
 import useDocumentTitle from "../../utils/useDocumentTitle";
-import AvatarUpload from "../../components/AvatarUpload/AvatarUpload.component.jsx";
-import {Container} from "./settings.styles"
-import Input from "../../components/input/Input.component.jsx";
-import CheckBox from "../../components/CheckBox/CheckBox.component.jsx";
-import TextArea from "../../components/TextArea/textarea.component.jsx";
-
+import { Container } from "./settings.styles"
+import { AvatarUpload, Input, CheckBox, TextArea } from "../../components";
 
 function Settings(){
     const {data,defaultImage,handleInputChange,handleSkillsSelection,handleAvatarChange,handleFormSubmission}=useContext(UserUpdateContext);

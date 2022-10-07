@@ -1,6 +1,5 @@
 import { Container } from "./CompanyDashBoard.styles";
-import Button from "../../components/button/button.component";
-import Activity from "../../components/Activity/activity.component";
+import { Button, Activity } from "../../components";
 import AddActivity from "./addActivity";
 import Pagination from '../../components/pagination/pagination.component';
 import { useState,useContext,Children  } from "react";

@@ -1,12 +1,7 @@
 import { useContext } from 'react';
 import { CompanySignUpContext } from '../../context/CompanySignUp.context';
 import { FormCont,Container } from '../UserSignUpForm/UserSignUpForm.styles';
-import Input from '../input/Input.component';
-import AvatarUpload from '../AvatarUpload/AvatarUpload.component';
-import TextArea from '../TextArea/textarea.component';
-import Select from '../Select/Select.component';
-import AuthPagesLogo from '../../components/AuthPagesLogo/AuthPagesLogo.component';
-import Link from "../../components/link/link.component";
+import { Input, AvatarUpload, TextArea, Select, AuthPagesLogo, Link } from "../";
 
 function CompanySignUpForm(){
     const {companyValues,handleFormSubmission,handleTypeSelection,handleInputChange,handleAvatarChange}=useContext(CompanySignUpContext)

@@ -1,7 +1,7 @@
 import { Children, Fragment, useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/user.context";
 import { getUserActivities as getUserActivitiesHelper, deleteUserActivity as deleteUserActivityHelper } from "../../utils/supabase.utils";
-import Applicant from "../../components/applicant/applicant.component";
+import { Applicant } from "../../components";
 
 function UserActivities(){
 

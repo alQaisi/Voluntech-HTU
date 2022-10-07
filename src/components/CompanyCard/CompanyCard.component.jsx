@@ -1,5 +1,5 @@
 import { CardLink,Container,CardHeader,CountryAvatar,Info } from "./CompanyCard.styles";
-import Skill from "../skill/skill.component"
+import { Skill } from "../";
 
 function CompanyCard({id,data}){
     const {cName,cType,email,imagePath,phone}=data;

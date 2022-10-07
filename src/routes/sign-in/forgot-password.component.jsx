@@ -1,9 +1,7 @@
 import {Container,FormCont} from './signin.styles';
-import AuthPagesLogo from '../../components/AuthPagesLogo/AuthPagesLogo.component';
-import Input from '../../components/input/Input.component';
 import { UserSignInContext } from '../../context/UserSignIn.context';
 import { useContext,useEffect } from "react";
-import Link from "../../components/link/link.component";
+import { Link, Input, AuthPagesLogo } from "../../components";
 
 function ForgotPassword(){
     const {handleEmailChange,setUserEmail,handleForm2Submission}=useContext(UserSignInContext);

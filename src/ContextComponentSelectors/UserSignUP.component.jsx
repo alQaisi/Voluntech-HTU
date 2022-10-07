@@ -1,4 +1,4 @@
-import UserSignUpForm from "../components/UserSignUpForm/UserSignUpForm.component";
+import { UserSignUpForm } from "../components";
 import { UserSignUpContextProvider } from "../context/UserSignUp.context";
 import SignRedirectRoute from "../routes/SignRedirectRoute/SignRedirectRoute.component";
 

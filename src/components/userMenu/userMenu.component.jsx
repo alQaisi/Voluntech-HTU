@@ -1,5 +1,5 @@
-import {MenuCont} from "./userMenu.styles";
-import Link from "../link/link.component";
+import { MenuCont } from "./userMenu.styles";
+import { Link } from "../";
 import { useRef, useEffect, useContext } from "react";
 import { UserMenuContext } from '../../context/UserMenu.context';
 

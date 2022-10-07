@@ -1,5 +1,5 @@
 import { Container,Half1,Half2,ProfileImage,ProfileLink } from "./profilecard.styles";
-import Skill from "../skill/skill.component";
+import { Skill } from "../";
 import { Children } from "react";
 function ProfileCard({id,data}){
     const {fName,lName,phone,skills,imagePath,city}=data;

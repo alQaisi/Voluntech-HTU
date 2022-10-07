@@ -2,12 +2,9 @@ import { Outlet,useNavigate } from 'react-router-dom';
 import { useContext, Fragment } from 'react';
 import { UserContext } from '../../context/user.context';
 import { UserMenuContext } from '../../context/UserMenu.context';
-import UserMenu from '../userMenu/userMenu.component';
 import { Hero,Logo,AppBar,UserNav,ProfileTitle,Avatar,MenuIcon,CloseMenuIcon} from './header.styles';
-import Link from '../link/link.component';
-import AppMenu from '../AppMenu/AppMenu.component';
-import Footer from '../footer/footer.component';
-import Notification from '../Notification/notification.component';
+import { Link, AppMenu, Footer, Notification, UserMenu } from "../";
+
 
 function Header(){
     const {menuStatus,toggleMenu}=useContext(UserMenuContext);

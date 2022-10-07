@@ -1,6 +1,5 @@
 import { AddWorkCont,CloseIcon } from "./userDashboard.styles";
-import Input from "../../components/input/Input.component";
-import DatePicker from "react-datepicker";
+import { Input, DatePicker } from "../../components";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState,useEffect } from "react";
 function AddWork({toggleAddWork,updateWorkExperience,workExp}){

@@ -1,8 +1,7 @@
 import { useContext,Fragment } from "react";
 import { UserContext } from "../../context/user.context";
 import { Navigate } from "react-router-dom";
-import OuterLoading from '../../components/OuterLoading/OuterLoading.component'
-import ParticlesContainer from "../../components/ParticlesContainer/ParticlesContainer.component";
+import { OuterLoading, ParticlesContainer } from '../../components';
 
 function SignRedirectRoute({children}){
     const {user}=useContext(UserContext); 

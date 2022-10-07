@@ -2,7 +2,7 @@ import { ActivityLink, Container, CompanyLogo, InfoSmall, InfoBig, Overlay, Tech
 import { Delete } from "../workExperience/workExperience.styles";
 import { Fragment } from "react";
 import { useNavigate } from "react-router";
-import Skill from "../skill/skill.component";
+import { Skill } from "../";
 function Activity({activityData,deleteCallback}){
     const navigate=useNavigate();
     const {id,logo,cName,data}=activityData;
