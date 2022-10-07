@@ -1,15 +1,15 @@
-import {  HashRouter } from 'react-router-dom';
+import {  BrowserRouter } from 'react-router-dom';
 import UserProvider from "../context/user.context";
 import App from '../App';
 
 
 function AppC(){
     return(
-        <HashRouter>
+        <BrowserRouter>
             <UserProvider>
                 <App/>
             </UserProvider>
-        </HashRouter>
+        </BrowserRouter>
     );
 }
 export default AppC;
