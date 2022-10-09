@@ -1,12 +1,10 @@
 import {Container,FormCont} from './signin.styles';
 import { UserSignInContext } from '../../context/UserSignIn.context';
-import { useContext,useEffect } from "react";
+import { useContext } from "react";
 import { Link, Input, AuthPagesLogo } from "../../components";
 
 function ForgotPassword(){
-    const {handleEmailChange,setUserEmail,handleForm2Submission}=useContext(UserSignInContext);
-    // eslint-disable-next-line
-    useEffect(()=>()=>setUserEmail(),[])
+    const {handleEmailChange,handleForm2Submission}=useContext(UserSignInContext);
     return(
         <Container>
             <AuthPagesLogo path=""/>

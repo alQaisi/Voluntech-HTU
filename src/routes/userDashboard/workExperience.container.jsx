@@ -7,8 +7,8 @@ import AddWork from "./AddWork.component";
 function WorkExperienceCont(){
     const [addWork,toggleAddWork]=useState(false);
     const { data,updateWorkExperience }=useContext(UserUpdateContext);
-    const workExp=data.workExp;
-    const workExpItems=workExp.map((item,index)=>(
+    const workExp=data?.workExp;
+    const workExpItems=workExp && workExp.map((item,index)=>(
         <WorkExperience key={index} id={index} companyName={item.cName} title={item.title} startDate={item.startDate} endDate={item.endDate} city={item.city} country={item.country} deleteCallback={deleteWork}/>
     ));
     function deleteWork({target}){

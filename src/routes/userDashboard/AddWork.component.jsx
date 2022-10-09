@@ -13,6 +13,7 @@ function AddWork({toggleAddWork,updateWorkExperience,workExp}){
     }
     function onSubmit(evt){
         evt.preventDefault();
+        toggleAddWork(false);
         updateWorkExperience([...workExp,newWork]);
     }
     useEffect(()=>{

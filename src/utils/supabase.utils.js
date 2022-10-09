@@ -56,7 +56,7 @@ export async function update(id,authData,data,imageFile){
     const { user, error } = await supabase.auth.update({...authData,data:data});
     if(error)
         throw error;
-    let {newData,error2}=await supabase
+    let { data:newData, error:error2 }=await supabase
         .from("Profile")
         .update({data:data})
         .match({id:id});
@@ -131,6 +131,16 @@ export async function getActivity(actId){
         throw error;
     return data[0];
 }
+export async function updateActivitiesLogo(cid,imagePath){
+    const { data,error }=await supabase
+        .from("activities")
+        .update({logo:imagePath})
+        .match({cid});
+    console.log(data);
+    if(error)
+        throw error;
+    return data;
+}
 export async function toggleActivity(actId,newStatus){
     const { data, error } = await supabase
         .from('activities')
@@ -198,7 +208,20 @@ export async function getApplicants(aid){
         .match({aid});
     if(error)
         throw error;
-    return data;
+    const applicantsData=await Promise.all(data.map(async applicant=>{
+        const [userImage]=await getUserImage(applicant.uid);
+        return await { ...applicant, data:{ ...applicant.data,userImage:userImage.imagePath } }
+    }));
+    return applicantsData;
+}
+export async function getUserImage(id){
+    const { data:userImage, error }=await supabase
+        .from("Profile")
+        .select(`data->imagePath`)
+        .eq("id",id);
+    if(error)
+        throw error;
+    return userImage;
 }
 export async function ApproveApplicant(id){
     const { data,error }=await supabase

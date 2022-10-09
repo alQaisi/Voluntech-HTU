@@ -1,20 +1,36 @@
-import { createContext,useContext,useState,useEffect } from "react";
+import { useReducer,useContext,createContext } from "react";
 import { UserContext } from "./user.context";
 
+const INITIAL_STATE={
+    userInfo:{ email:"", password:"" },
+    userEmail:"",
+};
+
+const UserSignInReducer=function(state=INITIAL_STATE,action){
+    const { type, payload } =action;
+    switch(type){
+        case "SET_USER_INFO":
+            return { ...state, userInfo:payload, userEmail:"" };
+        case "SET_RESET_EMAIL":
+            return { ...state, userEmail:payload, userInfo:{ email:"", password:"" } };
+        default:
+            return state;
+    }
+}
 
 export const UserSignInContext=createContext({});
 
 export default function UserSignInProvider({children}){
-    const {signIn,signInWithEmail,setImageUrl}=useContext(UserContext);
-    const [userInfo,setUserInfo]=useState({email:"",password:""});
-    const [userEmail,setUserEmail]=useState();
+    const [ { userInfo, userEmail }, dispatch ]=useReducer(UserSignInReducer,INITIAL_STATE);
+    const {signIn,signInWithEmail}=useContext(UserContext);
     function handleEmailChange(evt){
         const inputElem=evt.target;
-        setUserEmail(inputElem.value);
+        dispatch({type:"SET_RESET_EMAIL",payload:inputElem.value});
     }
     function handleInputChange(evt){
         const inputElem=evt.target;
-        setUserInfo({...userInfo,[inputElem.name]:inputElem.value});
+        const newUserInfo={...userInfo,[inputElem.name]:inputElem.value}
+        dispatch({type:"SET_USER_INFO",payload:{...newUserInfo}});
     }
     function handleFormSubmission(evt){
         evt.preventDefault();
@@ -24,11 +40,8 @@ export default function UserSignInProvider({children}){
         evt.preventDefault();
         signInWithEmail(userEmail);
     }
-    useEffect(()=>(
-        setImageUrl(null)
-        //eslint-disable-next-line
-    ),[]);
-    const value={handleInputChange,handleFormSubmission,setUserEmail,handleEmailChange,handleForm2Submission};
+
+    const value={handleInputChange,handleFormSubmission,handleEmailChange,handleForm2Submission};
     return(
         <UserSignInContext.Provider value={value}>{children}</UserSignInContext.Provider>
     )

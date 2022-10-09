@@ -40,9 +40,9 @@ function UserActivities(){
         return ()=>cleanUp=true;
         //eslint-disable-next-line
     },[])
-
+    const userImage=user.user_metadata.imagePath;
     const activities=Children.toArray(userActivities.map(activity=>(
-        <Applicant actData={activity} deleteCallBack={deleteUserActivity}/>
+        <Applicant actData={{...activity,userImage}} deleteCallBack={deleteUserActivity}/>
     )));
 
     return(

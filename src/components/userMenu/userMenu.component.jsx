@@ -1,24 +1,20 @@
 import { MenuCont } from "./userMenu.styles";
 import { Link } from "../";
-import { useRef, useEffect, useContext } from "react";
-import { UserMenuContext } from '../../context/UserMenu.context';
+import { useRef, useEffect } from "react";
 
-function UserMenu({signOut}){
-
-    const {menuStatus,toggleMenu}=useContext(UserMenuContext);
+function UserMenu({signOut,menuStatus,toggleMenu}){
     const ref=useRef(null);
-
     useEffect(()=>{
         function handleClickOutside(evt){
             if (ref.current!==evt.target) {
                 setTimeout(() => {
-                    toggleMenu(!menuStatus); 
+                    toggleMenu(menuStatus); 
                 },0);
             }
         }
         function handleResize(evt){
             if(window.innerWidth>535)
-                toggleMenu(!menuStatus); 
+                toggleMenu(menuStatus); 
         }
         window.addEventListener("resize",handleResize);
         document.addEventListener("mousedown",handleClickOutside);

@@ -1,15 +1,30 @@
-import { createContext,useContext,useState } from "react";
+import { useReducer,createContext,useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import { getActivity as getActivityHelper, applyToActivity as applyToActivityHelper } from "../utils/supabase.utils";
 import { UserContext } from "./user.context";
+
+const INITIAL_STATA={
+    activity:undefined,
+}
+
+const ActivityReducer=function(state=INITIAL_STATA,action){
+    const { type,payload }=action;
+    switch(type){
+        case "SET_ACTIVITY":
+            return { state,...payload }
+        default:
+            return state;
+    }
+} 
 
 export const ActivityContext=createContext({});
 
 function ActivityProvider({children}){
     const navigate=useNavigate();
 
+    const [ { activity }, dispatch ]=useReducer(ActivityReducer,INITIAL_STATA);
+
     const {setOuterLoadingType,user,setErrorMessage}=useContext(UserContext);
-    const [activity,setActivity]=useState();
     const {imagePath,type}=user.user_metadata;
     const uid=user.id;
 
@@ -17,7 +32,7 @@ function ActivityProvider({children}){
         try{
             setOuterLoadingType("white");
             const data=await getActivityHelper(actId);
-            setActivity(data);
+            dispatch({type:"SET_ACTIVITY",payload:{activity:data}});
         }catch(err){
             navigate("/404");
         }finally{
@@ -30,7 +45,6 @@ function ActivityProvider({children}){
         try{
             setOuterLoadingType("white");
             await applyToActivityHelper(`${activity.id}${uid}`,activity.cid,uid,activity.id,activity.data.title,data);
-            window.location.reload(false);
         }catch(err){
             setErrorMessage("You have already applied for this activity");
         }finally{

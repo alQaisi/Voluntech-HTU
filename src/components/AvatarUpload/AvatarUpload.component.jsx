@@ -11,7 +11,7 @@ function AvatarUpload({onChange,bigSize=false,defaultImage}){
         if(!image)
             return;
         setURL(URL.createObjectURL(image));
-        !user && setImageUrl(URL.createObjectURL(image));
+        setImageUrl(user,URL.createObjectURL(image));
         // eslint-disable-next-line
     },[image]);
     function onImageChange(evt){

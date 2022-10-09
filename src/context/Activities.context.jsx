@@ -1,40 +1,64 @@
-import { useState,useEffect,createContext } from "react";
+import { useReducer,useEffect,createContext } from "react";
 import { getActivites as getActivitesHelper } from "../utils/supabase.utils";
+
+const INITIAL_STATE={
+    activities:[],
+    isError:false,
+    categoryFilter:"All Category",
+    cityFilter:"All Cities",
+    searchFilter:""
+};
+
+const ActivitiesReducer=function(state=INITIAL_STATE,action){
+    const { type, payload }=action;
+    switch(type){
+        case "SET_ACTIVITIES":
+            return { ...state, activities:payload };
+        case "SET_IS_ERROR_ACTIVITIES":
+            return { ...state, isError:payload };
+        case "SET_ACTIVITIES_CITY":
+            return { ...state, cityFilter:payload };
+        case "SET_ACTIVITIES_CATEGORY":
+            return { ...state, categoryFilter:payload };
+        case "SET_ACTIVITIES_SEARCH_TEXT":
+            return { ...state, searchFilter:payload };
+        default:
+            return state;
+    }
+}
 
 export const ActivitesContext=createContext({});
 
 function ActivitesProvider({children}){
-    const [activities,setActivites]=useState([]);
-    const [isError,setIsError]=useState(false);
-    const [categoryFilter,setCategoryFilter]=useState("All Category");
-    const [cityFilter,setCityFilter]=useState("All Cities");
-    const [searchFilter,setSearchFilter]=useState("");
+    
+    const [ { activities, isError, categoryFilter, cityFilter, searchFilter } , dispatch ]=useReducer(ActivitiesReducer,INITIAL_STATE)
+
     function onCategoryChange({target}){
         const inputElem=target;
-        setCategoryFilter(inputElem.value);
+        dispatch({type:"SET_ACTIVITIES_CATEGORY",payload:inputElem.value});
     }
     function onCityChange({target}){
         const inputElem=target;
-        setCityFilter(inputElem.value);
+        dispatch({type:"SET_ACTIVITIES_CITY",payload:inputElem.value});
     }
     function onSearchFieldChange({target}){
         const {value}=target;
-        setSearchFilter(value.toLowerCase());
+        dispatch({type:"SET_ACTIVITIES_SEARCH_TEXT",payload:value.toLowerCase()});
     } 
     async function getActivites(){
         try{
             const data=await getActivitesHelper("company");
-            setActivites(data.reverse());
+            dispatch({type:"SET_ACTIVITIES",payload:data.reverse()});
         }catch(err){
-            setIsError(true);
-        }
+            dispatch({type:"SET_IS_ERROR_ACTIVITIES",payload:true});
+        }            
     }
     useEffect(()=>{
         let cleanUp=false;
         !cleanUp && getActivites();
         return ()=>cleanUp=true;
     },[]);
-    const value={activities,cityFilter,onCityChange,setCityFilter,setSearchFilter,categoryFilter,onCategoryChange,onSearchFieldChange,searchFilter,isError};
+    const value={activities,cityFilter,onCityChange,categoryFilter,onCategoryChange,onSearchFieldChange,searchFilter,isError};
     return(
         <ActivitesContext.Provider value={value}>{children}</ActivitesContext.Provider>
     );

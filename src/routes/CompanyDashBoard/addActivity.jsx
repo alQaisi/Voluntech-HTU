@@ -30,6 +30,7 @@ function AddActivity({toggleAddActivity,addActivity}){
     function onSubmit(evt){
         evt.preventDefault();
         addActivity(newActivity);
+        toggleAddActivity();
     }
     return(
         <AddWorkCont>

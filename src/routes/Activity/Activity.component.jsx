@@ -14,7 +14,7 @@ function Activity(){
         setApplyStatus(!ApplyStatus);
     }
 
-    const {activity,getActivity,type,imagePath,applyToActivity}=useContext(ActivityContext);
+    const {activity,getActivity,type,applyToActivity}=useContext(ActivityContext);
     const { actId } =useParams();
     const navigate=useNavigate();
     
@@ -51,7 +51,7 @@ function Activity(){
                     { type==="user" && <Button onClick={toggleApply}>Volunteer</Button> }   
                 </div>
             </Container>
-            { ApplyStatus && <ApplyToActivity toggleApply={toggleApply} imagePath={imagePath} applyToActivity={applyToActivity}/> }
+            { ApplyStatus && <ApplyToActivity toggleApply={toggleApply} applyToActivity={applyToActivity}/> }
         </Fragment>
     );
 }

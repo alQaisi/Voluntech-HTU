@@ -1,16 +1,36 @@
-import { useState,useEffect,createContext, useMemo } from "react";
+import { useReducer,useEffect,useMemo,createContext } from "react";
 import { getProfiles } from "../utils/supabase.utils";
+
+const defaultSkills={All:true,Data:false,Design:false,Hardware:false,Mobile:false,Websites:false};
+
+const INITIAL_STATE={
+    technologists:[],
+    isError:false,
+    skillFilter:defaultSkills,
+    cityFilter:"All Cities",
+}
+
+const TechnologistsReducer=function(state=INITIAL_STATE,action){
+    const { type, payload }=action;
+    switch(type){
+        case "SET_TECHNOLOGISTS":
+            return { ...state, technologists:payload };
+        case "SET_IS_ERROR_TECHNOLOGISTS":
+            return { ...state, isError:payload };
+        case "SET_TECHNOLOGISIT_CITY":
+            return { ...state, cityFilter:payload };
+        case "SET_SKILLS_FILTER":
+            return { ...state, skillFilter:payload };
+        default:
+            return state;
+    }
+}
 
 export const TechnologistsContext=createContext({});
 
 function TechnologistsProvider({children}){
 
-    const [technologists,setTechnologists]=useState([]);
-    const [isError,setIsError]=useState(false);
-
-    const defaultSkills={All:true,Data:false,Design:false,Hardware:false,Mobile:false,Websites:false};
-    const [skillFilter,setSkillFilter]=useState(defaultSkills);
-    const [cityFilter,setCityFilter]=useState("All Cities");
+    const [ { technologists, isError, skillFilter, cityFilter }, dispatch ]=useReducer(TechnologistsReducer,INITIAL_STATE);
 
     const memoizedSkillFilter=useMemo(()=>(function filterBySkill(){
         const skills=Object.keys(skillFilter).filter(skill=>skillFilter[skill]);
@@ -22,14 +42,16 @@ function TechnologistsProvider({children}){
                 .filter(technologist=>cityFilter==="All Cities"?true:technologist.data.city===cityFilter);
     function onSkillChange({target}){
         const inputElem=target;
-        if(inputElem.name==="All")
-            return inputElem.checked?setSkillFilter(defaultSkills):null;
         const newSkillFilter={...skillFilter,All:false,[inputElem.name]:inputElem.checked};
-        if (Object.values(newSkillFilter).slice(1).reduce((acc,item)=>acc && item,true))
-            return setSkillFilter(defaultSkills);
-        if (!Object.values(newSkillFilter).slice(0).reduce((acc,item)=>acc || item))
-            return setSkillFilter(defaultSkills);
-        setSkillFilter(newSkillFilter);
+        switch(true){
+            case inputElem.name==="All" && inputElem.checked:
+            case Object.values(newSkillFilter).slice(1).reduce((acc,item)=>acc && item,true):
+            case !Object.values(newSkillFilter).slice(0).reduce((acc,item)=>acc || item):
+                return dispatch({type:"SET_SKILLS_FILTER",payload:defaultSkills});
+            default:
+                break;
+        }
+        dispatch({type:"SET_SKILLS_FILTER",payload:newSkillFilter});
     }
     function filterSkills(userSkills,selectedSkills){
         for(let i=0;i<selectedSkills.length;i++){
@@ -41,14 +63,14 @@ function TechnologistsProvider({children}){
 
     function onCityChange({target}){
         const inputElem=target;
-        setCityFilter(inputElem.value);
+        dispatch({type:"SET_TECHNOLOGISIT_CITY",payload:inputElem.value});
     }
     async function getTechnologists(){
         try{
             const data=await getProfiles("user");
-            setTechnologists(data.reverse());
+            dispatch({type:"SET_TECHNOLOGISTS",payload:data.reverse()});
         }catch(err){
-            setIsError(true);
+            dispatch({type:"SET_IS_ERROR_TECHNOLOGISTS",payload:true});
         }
     }
     useEffect(()=>{
@@ -56,7 +78,6 @@ function TechnologistsProvider({children}){
         !cleanUp && getTechnologists();
         return ()=>cleanUp=true;
     },[]);
-
     const value={FilterdProfiles,technologists,onSkillChange,onCityChange,isError,cityFilter,skillFilter,filterSkills};
     return(
         <TechnologistsContext.Provider value={value}>{children}</TechnologistsContext.Provider>

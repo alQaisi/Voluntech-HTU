@@ -12,7 +12,7 @@ function Applicant({actData,deleteCallBack,approveCallBack}){
     return (
         <Container className={deleteCallBack?"extend":""}>
             <div className="first-line">
-                <Avatar src={`https://nrhsumqatauurhjsswzq.supabase.co/storage/v1/object/public/avatars/${data.userImage}`} alt="user avatar" />
+                <Avatar src={`https://nrhsumqatauurhjsswzq.supabase.co/storage/v1/object/public/avatars/${actData.userImage || data.userImage}`} alt="user avatar" />
                 <Title>{title}</Title>
             </div>
             <Notes>

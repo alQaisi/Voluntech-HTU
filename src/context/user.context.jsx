@@ -1,22 +1,66 @@
-import { useState,useEffect,createContext } from "react";
-import {supabase,signUp as signUpHelper,signIn as signInHelper,signInWithEmail as signInWithEmailHelper,update as updateHelper } from '../utils/supabase.utils';
+import { useEffect, useReducer, createContext } from "react";
+import {supabase,signUp as signUpHelper,signIn as signInHelper,signInWithEmail as signInWithEmailHelper,update as updateHelper, updateActivitiesLogo } from '../utils/supabase.utils';
 
 export const UserContext=createContext({});
 
+const INITIAL_STATE={
+    OuterLoadingType:undefined,
+    user:undefined,
+    imageUrl:undefined,
+    errorMessage:undefined,
+    notification:undefined,
+}
+
+const UserReducer=function(state=INITIAL_STATE,action){
+    const { type, payload }=action;
+    switch(type){
+        case "SET_USER_DATA":
+            return { ...state, ...payload };
+        case "SET_REG_IMAGE_URL":
+            return { ...state, imageUrl:payload }
+        case "NOTIFICATION":
+            return { ...state, notification:payload };
+        case "SET_LOADING_TYPE":
+            return { ...state, OuterLoadingType:payload };
+        case "SET_ERROR_MESSAGE":
+            return { ...state, errorMessage:payload }
+        default:
+            return state;
+    }
+}
+
 function UserProvider({children}){
 
-    const [OuterLoadingType,setOuterLoadingType]=useState();
-    const [user,setUser]=useState();
-    const [imageUrl,setImageUrl]=useState();
-    const [errorMessage,setErrorMessage]=useState();
-    const [notification,setNotification]=useState();
+    const [ { OuterLoadingType, user, imageUrl, errorMessage, notification }, dispatch]=useReducer(UserReducer,INITIAL_STATE)
+
+    function setOuterLoadingType(type){
+        dispatch({type:"SET_LOADING_TYPE",payload:type});
+    }
+
+    function setErrorMessage(type){
+        dispatch({type:"SET_ERROR_MESSAGE",payload:type});
+    }
+
+    function setNotification(type){
+        dispatch({type:"NOTIFICATION",payload:type});
+    }
+
+    function setUser(user,imageUrl){
+        dispatch({type:"SET_USER_DATA",payload:{user,...(imageUrl && {imageUrl})}});
+    }
     
+    function setImageUrl(imageUrl){
+        dispatch({type:"SET_REG_IMAGE_URL",payload:imageUrl});
+    }
+
     useEffect(()=>{
         const session = supabase.auth.session();
         setUser(session?.user ?? null);
         const { data: listener } = supabase.auth.onAuthStateChange(
             (event, session) => {
-                setUser(session?.user ?? null)
+                setUser(session?.user ?? null);
+                if(!session?.user)
+                    dispatch({type:"SET_REG_IMAGE_URL",payload:undefined});
             }
         );
         return () => {
@@ -50,7 +94,7 @@ function UserProvider({children}){
         return ()=>{
             supabase.removeAllSubscriptions();
         }
-    },[user])
+    },[user]);
 
     async function signIn(userInfo){
         try{
@@ -64,6 +108,7 @@ function UserProvider({children}){
     }
     async function signInWithEmail(userEmail){
         try{
+            setImageUrl();
             await signInWithEmailHelper(userEmail);
         }catch(error){
             setErrorMessage(error.message);
@@ -81,11 +126,14 @@ function UserProvider({children}){
     }
     async function updateProfile(authData,data,imageFile){
         try{
+            const oldImagePath=user.user_metadata.imagePath;
+            const { imagePath, type }=data;
             setOuterLoadingType("normal");
-            await updateHelper(user.id,authData,data,imageFile);
-            setTimeout(() => {
-                window.location.reload(false); 
-            },100); 
+            const { user:newUserData }=await updateHelper(user.id,authData,data,imageFile);
+            if( oldImagePath!==imagePath && type==="company")
+                await updateActivitiesLogo(user.id,imagePath);
+            const imageUrl=imageFile && URL.createObjectURL(imageFile);
+            setUser(newUserData,imageUrl);
         }catch(error){
             setErrorMessage(error.message);
         }finally{
@@ -98,10 +146,9 @@ function UserProvider({children}){
         signInWithEmail,
         signOut: () => {
             supabase.auth.signOut();
-            setImageUrl();
         },
         updateProfile,
-        user,imageUrl,setImageUrl,errorMessage,setErrorMessage,
+        user,setImageUrl,imageUrl,errorMessage,setErrorMessage,
         OuterLoadingType,setOuterLoadingType,
         notification,setNotification
     }

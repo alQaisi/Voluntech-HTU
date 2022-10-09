@@ -1,12 +1,28 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useReducer ,useEffect, useContext, createContext } from "react";
 import { UserContext } from "./user.context";
 import { addActivity as addActivityHelper, getCompanyActivites as getCompanyActivitesHelper, deleteActivity as deleteActivityHelper, deleteActivityApplicants } from "../utils/supabase.utils";
+
+const INITIAL_STATE={
+    activites:[]
+}
+
+const CompanyDashboardReducer=function(state=INITIAL_STATE,action){
+    const { type, payload }=action;
+    switch(type){
+        case "SET_COMPANY_ACTIVITIES":
+            return { ...state, activites:payload };
+        default:
+            return state;
+    }
+}
 
 export const CompanyDashboardContext=createContext();
 
 function CompanyDashboardProvider({children}){
+
+    const [ { activites }, dispatch ]=useReducer(CompanyDashboardReducer,INITIAL_STATE);
+
     const { user, setOuterLoadingType, setErrorMessage }=useContext(UserContext);
-    const [activites,setActivites]=useState([]);
     
     async function getCompanyActivites(){
         const cid=user.id;
@@ -14,7 +30,7 @@ function CompanyDashboardProvider({children}){
             setOuterLoadingType("normal");
             const data=await getCompanyActivitesHelper(cid);
             if(data)
-                setActivites(data.reverse());
+                dispatch({type:"SET_COMPANY_ACTIVITIES",payload:data.reverse()});
         }catch(error){
             setErrorMessage(error.message);
         }finally{
@@ -39,8 +55,8 @@ function CompanyDashboardProvider({children}){
         try{
             setOuterLoadingType("normal");
             const activity=await addActivityHelper(cid,cName,logo,data);
-            if(activity)
-                window.location.reload(false); 
+            const newActivities=[...activity,...activites]
+            dispatch({type:"SET_COMPANY_ACTIVITIES",payload:newActivities}); 
         }catch(error){
             setErrorMessage(error.message);
         }finally{
@@ -51,9 +67,10 @@ function CompanyDashboardProvider({children}){
         try{
             setOuterLoadingType("normal");
             await deleteActivityApplicants(id);
-            const data=await deleteActivityHelper(id);
-            if(data)
-                window.location.reload(false); 
+            await deleteActivityHelper(id);
+            //eslint-disable-next-line
+            const newActivities=activites.filter(activity=>activity.id!=id);
+            dispatch({type:"SET_COMPANY_ACTIVITIES",payload:newActivities});
         }catch(error){
             setErrorMessage(error.message);
         }finally{

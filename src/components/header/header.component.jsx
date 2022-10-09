@@ -27,8 +27,8 @@ function Header(){
                     <ProfileTitle>Go to your profile</ProfileTitle>
                     {
                         menuStatus
-                        ?<><CloseMenuIcon onClick={toggleMenu}/><UserMenu signOut={signOut}/></>
-                        :<MenuIcon onClick={toggleMenu}/>
+                        ?<><CloseMenuIcon onClick={()=>toggleMenu(menuStatus)}/><UserMenu signOut={signOut} menuStatus={menuStatus} toggleMenu={toggleMenu} /></>
+                        :<MenuIcon onClick={()=>toggleMenu(menuStatus)}/>
                     }
                 </UserNav>
             </AppBar>

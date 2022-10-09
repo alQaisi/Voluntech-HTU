@@ -1,32 +1,51 @@
-import { useState,useEffect,createContext } from "react";
+import { useReducer,useEffect,createContext } from "react";
 import { getProfiles } from "../utils/supabase.utils";
+
+const INITIAL_STATE={
+    companies:[],
+    isError:false,
+    typeFilter:"All types",
+    searchFilter:""
+}
+
+const CompaniesReducer=function(state=INITIAL_STATE,action){
+    const { type, payload }=action;
+    switch(type){
+        case "SET_COMPANIES":
+            return { ...state,companies:payload };
+        case "SET_IS_ERROR_COMPANIES":
+            return { ...state,isError:payload };
+        case "SET_COMPANIES_TYPE":
+            return { ...state, typeFilter:payload };
+        case "SET_COMPANIES_SEARCH_TEXT":
+            return { ...state,searchFilter:payload };
+        default:
+            return state;
+    }
+}
 
 export const CompaniesContext=createContext({});
 
 function CompaniesProvider({children}){
 
-    const [companies,setCompanies]=useState([]);
-    const [isError,setIsError]=useState(false);
-
-    const [typeFilter,setTypeFilter]=useState("All types");
-    const [searchFilter,setSearchFilter]=useState("");
+    const [ { companies, isError, typeFilter, searchFilter } , dispatch ]=useReducer(CompaniesReducer,INITIAL_STATE);
 
     function onTypeChange({target}){
         const inputElem=target;
-        setTypeFilter(inputElem.value);
+        dispatch({type:"SET_COMPANIES_TYPE",payload:inputElem.value});
     }
 
     function onSearchFieldChange({target}){
         const {value}=target;
-        setSearchFilter(value.toLowerCase());
+        dispatch({type:"SET_COMPANIES_SEARCH_TEXT",payload:value.toLowerCase()});
     } 
 
     async function getCompanies(){
         try{
             const data=await getProfiles("company");
-            setCompanies(data.reverse());
+            dispatch({type:"SET_COMPANIES",payload:data.reverse()});
         }catch(err){
-            setIsError(true);
+            dispatch({type:"SET_IS_ERROR_COMPANIES",payload:true});
         }
     }
 

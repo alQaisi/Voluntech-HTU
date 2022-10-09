@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState,useEffect } from "react";
 
-function ApplyToActivity({toggleApply,imagePath,applyToActivity}){
+function ApplyToActivity({toggleApply,applyToActivity}){
     useEffect(()=>{
         window.scrollTo({
             top: 0,
@@ -16,7 +16,7 @@ function ApplyToActivity({toggleApply,imagePath,applyToActivity}){
     },[]);
     const [dateRange,setDateRange]=useState([null,null]);
     const [startDate,endDate]=dateRange;
-    const [data,setDate]=useState({userImage:imagePath,notes:"",startDate,endDate});
+    const [data,setDate]=useState({notes:"",startDate,endDate});
     
     function handleInputChange({target}){
         setDate({...data,notes:target.value});
@@ -24,6 +24,7 @@ function ApplyToActivity({toggleApply,imagePath,applyToActivity}){
     function onSubmit(evt){
         evt.preventDefault();
         applyToActivity(data);
+        toggleApply();
     }
     useEffect(()=>{
         const formatedSD=startDate?.toLocaleDateString();
