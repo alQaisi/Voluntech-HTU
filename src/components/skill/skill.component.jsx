@@ -1,8 +1,8 @@
 import { Skill as SkillItem } from "./skill.styles";
 
-function Skill({children,onClick}){
+function Skill({children,colorMode,onClick}){
     return(
-        <SkillItem onClick={onClick}>{children}</SkillItem>
+        <SkillItem className={colorMode} onClick={onClick}>{children}</SkillItem>
     );
 }
 export default Skill;

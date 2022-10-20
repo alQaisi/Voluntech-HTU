@@ -4,7 +4,7 @@ import Cities from '../../assets/cities.json';
 import "react-datepicker/dist/react-datepicker.css";
 import { useState,useEffect } from "react";
 
-function AddActivity({toggleAddActivity,addActivity}){
+function AddActivity({toggleAddActivity,addActivity,colorMode}){
     const [dateRange,setDateRange]=useState([null,null]);
     const [startDate,endDate]=dateRange;
     const [newActivity,setNewActivity]=useState({title:"",description:"",city:"",skill:"",startDate:"",endDate:"",number:0});
@@ -30,18 +30,17 @@ function AddActivity({toggleAddActivity,addActivity}){
     function onSubmit(evt){
         evt.preventDefault();
         addActivity(newActivity);
-        toggleAddActivity();
     }
     return(
-        <AddWorkCont>
+        <AddWorkCont className={colorMode}>
             <form onSubmit={onSubmit}>
                 <CloseIcon onClick={toggleAddActivity}/>
-                <Input type="text" name="title" label="title" placeholder="Activity Title" onChange={handleInputChange} required/>
-                <TextArea name="description" placeholder="Type a breif description about the activity (350 characters max)" label="description" maxLength="350" required onChange={handleInputChange}/>
-                <Input type="number" name="number" label="Required Number" placeholder="Technologists Number" min="1" onChange={handleInputChange} required/>
-                <Select label={"City"} value={newActivity.city} onChange={handleCityChange}>{options}</Select>
+                <Input colorMode={colorMode}  type="text" name="title" label="title" placeholder="Activity Title" onChange={handleInputChange} required/>
+                <TextArea colorMode={colorMode} name="description" placeholder="Type a breif description about the activity (350 characters max)" label="description" maxLength="350" required onChange={handleInputChange}/>
+                <Input colorMode={colorMode} type="number" name="number" label="Required Number" placeholder="Technologists Number" min="1" onChange={handleInputChange} required/>
+                <Select colorMode={colorMode} label={"City"} value={newActivity.city} onChange={handleCityChange}>{options}</Select>
                 <br/>
-                <Select label={"Category"} value={newActivity.skill} onChange={handleSkillChange}>
+                <Select colorMode={colorMode} label={"Category"} value={newActivity.skill} onChange={handleSkillChange}>
                     <option>Select Category</option>
                     <option>Data</option>
                     <option>Design</option>
@@ -62,7 +61,7 @@ function AddActivity({toggleAddActivity,addActivity}){
                     required
                     withPortal
                 />
-                <Input type="submit" label="submit" value={"submit"}/>
+                <Input colorMode={colorMode} type="submit" label="submit" value={"submit"}/>
             </form>
         </AddWorkCont>
     );

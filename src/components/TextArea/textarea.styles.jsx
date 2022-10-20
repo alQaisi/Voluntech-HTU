@@ -15,4 +15,9 @@ export const Textarea=styled.textarea`
     &:focus{
         border-color: hsl(198.00,100%,50%);
     }
+    &.dark{
+        background-color: #303030;
+        color: #ddd;
+        border-color:#784BA0 !important;
+    }
 `

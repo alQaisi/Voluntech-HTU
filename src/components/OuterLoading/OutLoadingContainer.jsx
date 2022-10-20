@@ -1,9 +1,9 @@
 import OuterLoading from "./OuterLoading.component";
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context";
+import { useSelector } from "react-redux";
+import { selectOuterLoadingType } from "../../store/user/user.selector";
 
 function OutLoadingContainer(){
-    const {OuterLoadingType}=useContext(UserContext); 
+    const OuterLoadingType=useSelector(selectOuterLoadingType);
     return(
         <>{OuterLoadingType?<OuterLoading type={OuterLoadingType}/>:<></>}</>
     );

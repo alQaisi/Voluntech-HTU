@@ -28,4 +28,15 @@ export const Container=styled(container)`
             text-decoration: underline;
         }
     }
+    &.dark{
+        .category{
+            color:#ddd;
+        }
+        .navigate{
+            color:#aaa;
+            :hover{
+                color:#ddd;
+            }
+        }
+    }
 `

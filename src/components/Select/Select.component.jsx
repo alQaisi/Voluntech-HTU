@@ -1,8 +1,8 @@
 import { CustomSelect } from "./Select.styles";
 
-function Select({children,label,value,onChange}){
+function Select({children,label,value,onChange,colorMode}){
     return(
-        <CustomSelect value={value} aria-label={label} onChange={onChange}>
+        <CustomSelect className={colorMode} value={value} aria-label={label} onChange={onChange}>
             {children}
         </CustomSelect>
     );

@@ -21,4 +21,15 @@ export const Skill=styled.p`
         outline-color:#21c5a2;
     }
     transition: all .25s ease-in-out;
+    &.dark{
+        color: #ddd;
+        background-color: #FF3CAC;
+        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        :hover{
+            cursor: pointer;
+            background-image: unset;
+            background-color: #2a2a2a;
+            outline-color:#784BA0;
+        }
+    }
 `;

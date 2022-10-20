@@ -1,15 +1,15 @@
-import { useContext } from "react";
-import { UserContext } from "../../context/user.context";
-import UserDashboardC from "../../ContextComponentSelectors/UserDashBoardC";
-import CDC from "../../ContextComponentSelectors/CDC.component";
+import { selectUser } from "../../store/user/user.selector";
+import UserDashboard from "../userDashboard/userDashboard.component";
+import CompanyDashboard from "../CompanyDashBoard/CompanyDashBoard.component";
 import useDocumentTitle from '../../utils/useDocumentTitle';
+import { useSelector } from "react-redux";
 
 function Dashboard(){
+    const user=useSelector(selectUser);
     useDocumentTitle("Dahsboard");
-    const { user } = useContext(UserContext);
     if(user.user_metadata.type==="user")
-        return <UserDashboardC/>;
-    return <CDC/>;
+        return <UserDashboard/>;
+    return <CompanyDashboard/>;
 }
 
 export default Dashboard;

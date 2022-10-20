@@ -1,9 +1,12 @@
 import { Container,Message } from "./Error.styles";
-import { useContext } from "react";
-import { UserContext } from '../../context/user.context'
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { selectErrorMessage } from "../../store/user/user.selector";
+import { setErrorMessage } from "../../store/user/user.actions";
 
 function Error(){
-    const {errorMessage,setErrorMessage}=useContext(UserContext);
+    const dispatch=useDispatch();
+    const errorMessage=useSelector(selectErrorMessage);
     return(
         <>
         {
@@ -11,7 +14,7 @@ function Error(){
             (<Container>
                 <Message>
                     <h3>{errorMessage}</h3>
-                    <button onClick={()=>setErrorMessage(undefined)}>close</button>
+                    <button onClick={()=>dispatch(setErrorMessage(undefined))}>close</button>
                 </Message>
             </Container>)
             :null

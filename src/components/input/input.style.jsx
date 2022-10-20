@@ -27,4 +27,17 @@ export const InputItem=styled.input`
             background-color: white;
         }
     }
+    &.dark{
+        background-color: #303030;
+        color: #ddd;
+        border-color:#784BA0 !important;
+    }
+    &[type="submit"].dark{
+        background-color: #784BA0;
+        color: #ddd;
+        border-color:#784BA0;
+        &:hover{
+            background-color:#2a2a2a;
+        }
+    }
 `;

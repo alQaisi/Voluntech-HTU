@@ -28,4 +28,13 @@ export const Container=styled.div`
         border-radius: 0.3rem;
         cursor: pointer;
     }
+    &.dark{
+        label{
+            background-color:#784BA0;
+            color: #ddd;
+        }
+        & img.big{
+            outline-color:#784BA0;
+        }
+    }
 `

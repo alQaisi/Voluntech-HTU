@@ -17,6 +17,12 @@ export const Container=styled.footer`
         margin-block: 0;
         font-size: .75rem;
     }
+    &.dark{
+        background-color:#784BA0;
+        h5{
+            color: #ddd;
+        }
+    }
 `;
 export const Divider=styled.div`
     width: 100%;

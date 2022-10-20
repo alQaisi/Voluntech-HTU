@@ -97,4 +97,29 @@ export const Container=styled.div`
         left:20px;
         top:25px;
     }
+    &.dark{
+        background-color: #2a2a2a;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23dddddd' fill-opacity='0.06' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+        ${UserType},${UserBreif}{
+            background-color:#784BA0;
+            color:#ddd;
+        }
+        h1,h3{
+            color:#ddd;
+        }
+        h4,h5{
+            color:#aaa;
+        }
+        ${Website},${Email}{
+            background-color: #2a2a2a;
+            border-color:#784BA0;
+            color: #ddd;
+            :hover{
+                background-color:#784BA0;
+            }
+        }
+        ${UserAvatar}{
+            outline:5px solid #784BA0;
+        }
+    }
 `;

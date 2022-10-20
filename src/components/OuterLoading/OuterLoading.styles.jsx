@@ -24,4 +24,22 @@ export const Container=styled.div`
         fill: #08091f;
         }
     }
+    &.dark{
+        background-color: #784BA0 ;
+        background-image: linear-gradient(225deg, #801552 0%, #784BA0 50%, #2B86C5 100%);
+        
+    }
+    &.dark,&.dark.normal{
+        svg:first-child *{
+            stroke:#ddd;
+            fill:#ddd;
+        }
+        svg:last-child *{
+            stroke:#ddd;
+        }
+    }
+    &.dark.normal{
+        background-image: none;
+        background-color:#2a2a2a;
+    }
 `;

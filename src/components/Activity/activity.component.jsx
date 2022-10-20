@@ -3,7 +3,7 @@ import { Delete } from "../workExperience/workExperience.styles";
 import { Fragment } from "react";
 import { useNavigate } from "react-router";
 import { Skill } from "../";
-function Activity({activityData,deleteCallback}){
+function Activity({activityData,colorMode,deleteCallback}){
     const navigate=useNavigate();
     const {id,logo,cName,data}=activityData;
     const ActivityBody=(
@@ -11,7 +11,7 @@ function Activity({activityData,deleteCallback}){
             <Overlay/>
             <CompanyLogo src={`https://nrhsumqatauurhjsswzq.supabase.co/storage/v1/object/public/avatars/${logo}`} alt={"comapny name"}/>
             <InfoBig>{data.title}</InfoBig>
-            <Skill>{data.skill}</Skill>
+            <Skill colorMode={colorMode}>{data.skill}</Skill>
             <InfoSmall>By {cName}</InfoSmall>
             <InfoSmall className="withIcon"><CityIcon/>{data.city}</InfoSmall>
             <InfoSmall className="withIcon"><TechnologistsIcon/>{data.number}</InfoSmall>
@@ -20,7 +20,7 @@ function Activity({activityData,deleteCallback}){
     );
     if(deleteCallback)
         return(
-            <Container>
+            <Container className={colorMode}>
                 {ActivityBody}
                 <ManageIcon onClick={()=>navigate(`/manage/${id}`)}/>
                 <Delete data-id={id} onClick={deleteCallback}/>
@@ -28,7 +28,7 @@ function Activity({activityData,deleteCallback}){
         );
     return(
         <ActivityLink to={`/activity/${id}`} target="_blank" rel="noopener noreferrer">
-            <Container>
+            <Container className={colorMode}>
                 {ActivityBody}
             </Container>
         </ActivityLink>

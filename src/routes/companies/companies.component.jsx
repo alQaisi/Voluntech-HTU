@@ -1,22 +1,46 @@
 import { Container } from './companies.styles';
-import { useContext,Children } from "react";
-import { CompaniesContext } from '../../context/Companies.context';
+import { useEffect,Children } from "react";
 import { CompanyCard, Input, Select, WithLoading } from "../../components";
 import Pagination from '../../components/pagination/pagination.component';
 import useDocumentTitle from '../../utils/useDocumentTitle';
+import { useSelector,useDispatch } from "react-redux";
+import { getfilterdCompanies,getCompanies,getCompaniesStatus } from "../../store/companies/companies.selectors";
+import { getCompaniesAsync,resetCompanies,setCompaniesType,setCompaniesSearchtext } from "../../store/companies/companies.actions";
+import { selectColorMode } from "../../store/ui/ui.selectors";
 
 function Companies(){
-    const {companies,typeFilter,onTypeChange,searchFilter,onSearchFieldChange,isError}=useContext(CompaniesContext);
-    const filteredCompanies=Children.toArray(companies
-                    .filter(company=>company.data.cName.toLowerCase().includes(searchFilter))
-                    .filter(company=>typeFilter==="All types"?true:company.data.cType===typeFilter)
-                    .map(company=><CompanyCard {...company}/>));
+    const dispatch=useDispatch();
+    const colorMode=useSelector(selectColorMode);
+    const { typeFilter,isError }=useSelector(getCompaniesStatus);
+    const companies=useSelector(getCompanies);
+    const filteredCompanies=Children.toArray(useSelector(getfilterdCompanies)
+                    .map(company=><CompanyCard colorMode={colorMode} {...company}/>));
     useDocumentTitle("Companies");
+
+    function onTypeChange({target}){
+        const inputElem=target;
+        dispatch(setCompaniesType(inputElem.value));
+    }
+
+    function onSearchFieldChange({target}){
+        const {value}=target;
+        dispatch(setCompaniesSearchtext(value.toLowerCase()));
+    } 
+
+    useEffect(()=>{
+        let cleanUp=false;
+        !cleanUp && dispatch(getCompaniesAsync());
+        return ()=>{
+            cleanUp=true
+            dispatch(resetCompanies());
+        };
+    },[dispatch]);
+
     return(
-        <WithLoading status={!companies.length>0} error={isError}>
-            <Container>
-                <Input name="companyName" type="search" label="search by company name" placeholder="Search for companies" onChange={onSearchFieldChange}/>
-                <Select label="company type" value={typeFilter} onChange={onTypeChange}>
+        <WithLoading status={companies===undefined} colorMode={colorMode} error={isError}>
+            <Container className={colorMode}>
+                <Input colorMode={colorMode} name="companyName" type="search" label="search by company name" placeholder="Search for companies" onChange={onSearchFieldChange}/>
+                <Select colorMode={colorMode} label="company type" value={typeFilter} onChange={onTypeChange}>
                     <option>All types</option>
                     <option>NGO</option>
                     <option>Government</option>

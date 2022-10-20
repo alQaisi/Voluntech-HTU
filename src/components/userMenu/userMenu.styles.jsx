@@ -13,6 +13,10 @@ export const MenuCont=styled.div`
     right:20px;
     z-index: 5;
     background-color: white;
+    &.dark{
+        background-color:#2a2a2aeb;
+        border:1px solid #dddddd28;
+    }
     @media screen and (max-width:535px){
         display: flex;
     }

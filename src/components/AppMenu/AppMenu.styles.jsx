@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled,{ css } from "styled-components";
 import { NavLink as navLink } from "react-router-dom";
+
+const darkModeGradient=css`
+    background-color: #FF3CAC;
+    background-image: linear-gradient(225deg, #FF3CAC 0%, #2B86C5 100%);
+`;
 
 export const NavLink=styled(navLink)`
     all:unset;
@@ -63,6 +68,19 @@ export const Container=styled.div`
         background-color: white;
         transform: unset;
         box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
+    }
+    &.dark{
+        background-color: #2a2a2aeb;
+        border:1px solid #36363663;
+        & a{
+            color: #ddd;
+            :hover{
+                color: white;
+            }
+            ::after{
+                ${darkModeGradient}
+            }
+        }
     }
     @media screen and (max-width:815px) {
         transform: unset;

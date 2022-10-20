@@ -1,7 +1,7 @@
 import { NavLink,Container } from "./AppMenu.styles";
 import { useEffect, useRef, } from "react";
 
-function AppMenu(){
+function AppMenu({colorMode}){
     const AppMenuRef=useRef(null);
     useEffect(()=>{
         AppMenuRef.current?.classList?.remove("ActiveNavLink");
@@ -21,7 +21,7 @@ function AppMenu(){
           };
     },[]);
     return(
-        <Container ref={AppMenuRef}>
+        <Container ref={AppMenuRef} className={colorMode}>
             <NavLink to="/">Home</NavLink>
             <NavLink to='/companies'>Companies</NavLink>
             <NavLink to='/technologists'>Technologists</NavLink>

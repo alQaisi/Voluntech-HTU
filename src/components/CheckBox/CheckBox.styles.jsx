@@ -51,4 +51,13 @@ export const CheckBoxCont=styled.label`
     & input:checked ~ ${Checkmark}::after{
         display: block;
     }
+    &.dark{
+        color: #ddd;
+        & input:checked ~ ${Checkmark}{
+            background-color: #784BA0;
+        }
+        ${Checkmark}{
+            outline-color:#784BA0;
+        }
+    }
 `;

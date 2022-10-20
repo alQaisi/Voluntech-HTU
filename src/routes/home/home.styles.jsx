@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+export const SpaceFill=styled.span`
+    position: absolute;
+    top:-100px;
+    left: 0;
+    right: 0;
+    height: 102px;
+    background-color:transparent;
+`
+
 export const MainHeading=styled.h1`
     color: #08091f;
     text-align: center;
@@ -16,6 +25,15 @@ export const MainText=styled.p`
 `;
 export const HomeCont=styled.div`
     padding: 0px 50px 25px;
+    position: relative;
+    &.dark,&.dark ${SpaceFill}{
+        background-color:#2a2a2a;
+    }
+    &.dark{
+        ${MainHeading},${MainText}{
+            color: #ddd;
+        }
+    }
     @media screen and (max-width:675px) {
         padding: 0px 25px 75px;
         ${MainHeading}{
@@ -26,7 +44,6 @@ export const HomeCont=styled.div`
             font-size:1.15rem
         }
     }
-    
 `;
 
 export const GridItem=styled.div`

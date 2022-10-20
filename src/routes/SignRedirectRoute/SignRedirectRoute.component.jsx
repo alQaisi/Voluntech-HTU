@@ -1,10 +1,11 @@
-import { useContext,Fragment } from "react";
-import { UserContext } from "../../context/user.context";
+import { Fragment } from "react";
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { OuterLoading, ParticlesContainer } from '../../components';
+import { selectUser } from "../../store/user/user.selector";
 
 function SignRedirectRoute({children}){
-    const {user}=useContext(UserContext); 
+    const user=useSelector(selectUser); 
     if(user===null)
         return (
             <Fragment>
@@ -14,7 +15,7 @@ function SignRedirectRoute({children}){
         );
     if(user)
         return <Navigate to="/" replace />;
-    return <OuterLoading type="white"/>
+    return <OuterLoading type="white"/>;
 };
 
 export default SignRedirectRoute;

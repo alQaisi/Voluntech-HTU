@@ -1,54 +1,35 @@
-import { Children, Fragment, useState, useContext, useEffect } from "react";
-import { UserContext } from "../../context/user.context";
-import { getUserActivities as getUserActivitiesHelper, deleteUserActivity as deleteUserActivityHelper } from "../../utils/supabase.utils";
+import { Children,useEffect,Fragment } from "react";
+import { deleteUserActivitiesAsync,getUserActivitiesAsync } from "../../store/userDashboard/userDashboard.actions.js";
+import { selectUserActivities } from "../../store/userDashboard/userDashboard.selectors.js";
+import { selectUser } from "../../store/user/user.selector";
+import { useSelector,useDispatch } from "react-redux";
 import { Applicant } from "../../components";
 
-function UserActivities(){
+function UserActivities({colorMode}){
+    const dispatch=useDispatch();
+    const user=useSelector(selectUser);
+    const userActivities=useSelector(selectUserActivities);
 
-    const [userActivities,setUserActivities]=useState([]);
-
-    const {user,setErrorMessage,setOuterLoadingType}=useContext(UserContext);
-
-    async function getUserActivities(){
-        try{
-            setOuterLoadingType("normal");
-            const data=await getUserActivitiesHelper(user.id);
-            setUserActivities(data.reverse());
-        }catch(error){
-            setErrorMessage(error.message);
-        }finally{
-            setOuterLoadingType();
-        }
-    }
-
-    async function deleteUserActivity({target}){
+    function deleteUserActivity({target}){
         const {id}=target.dataset;
-        try{
-            setOuterLoadingType("normal");
-            await deleteUserActivityHelper(id);
-            window.location.reload(false);
-        }catch(error){
-            setErrorMessage(error.message);
-        }finally{
-            setOuterLoadingType();
-        }
+        dispatch(deleteUserActivitiesAsync(id,userActivities));
     }
 
     useEffect(()=>{
         let cleanUp=false;
-        !cleanUp && getUserActivities();
+        !cleanUp && dispatch(getUserActivitiesAsync(user.id));
         return ()=>cleanUp=true;
         //eslint-disable-next-line
     },[])
     const userImage=user.user_metadata.imagePath;
-    const activities=Children.toArray(userActivities.map(activity=>(
-        <Applicant actData={{...activity,userImage}} deleteCallBack={deleteUserActivity}/>
+    const activities=userActivities && Children.toArray(userActivities.map(activity=>(
+        <Applicant colorMode={colorMode} actData={{...activity,userImage}} deleteCallBack={deleteUserActivity}/>
     )));
 
     return(
         <Fragment>
             {activities}
         </Fragment>
-    )
+    );
 }
 export default UserActivities;

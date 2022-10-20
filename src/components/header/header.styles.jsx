@@ -1,7 +1,12 @@
 import styled,{css} from "styled-components";
 import { ReactComponent as LogoImg } from "../../assets/Voluntech.svg";
-import {GiHamburgerMenu} from "react-icons/gi"
-import {MdOutlineClose} from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi"
+import { MdOutlineClose,MdLightMode,MdOutlineDarkMode } from "react-icons/md";
+
+const darkModeGradient=css`
+    background-color: #784BA0 ;
+    background-image: linear-gradient(225deg,#784BA0 50%, #2B86C5 100%);
+`;
 
 const menuIconStyles=css`
     margin:0 0px 0 25px;
@@ -18,6 +23,19 @@ export const MenuIcon=styled(GiHamburgerMenu)`
 export const CloseMenuIcon=styled(MdOutlineClose)`
     ${menuIconStyles}
 `;
+const colorModeStyles=css`
+    margin:0 0px 0 15px;
+    font-size:1.5rem;
+    cursor:pointer;
+`;
+export const LightModeIcon=styled(MdOutlineDarkMode)`
+    fill:#2a2a2a;
+    ${colorModeStyles}
+`;
+export const DarkModeIcon=styled(MdLightMode)`
+    fill:#ddd;
+    ${colorModeStyles}
+`;
 export const Hero=styled.div`
     width: 100%;
     height:200px;
@@ -27,6 +45,9 @@ export const Hero=styled.div`
     background-image: 
         radial-gradient(at 47% 33%, hsl(162.00, 77%, 40%) 0, transparent 59%), 
         radial-gradient(at 82% 65%, hsl(198.00, 100%, 50%) 0, transparent 55%);
+    &.dark{
+        ${darkModeGradient}
+    }
 `;
 export const Logo=styled(LogoImg)`
     width:135px;
@@ -37,7 +58,7 @@ export const Logo=styled(LogoImg)`
 export const ProfileTitle=styled.span`
     position: absolute;
     top:80px;
-    right:40px;
+    right:75px;
     background: rgba(0,0,0,.1);
     padding: 8px 13px;
     border-radius: 25px;
@@ -57,7 +78,7 @@ export const Avatar=styled.img`
     cursor: pointer;
     outline: 2px solid #17B486;
     :hover + ${ProfileTitle}{
-            opacity: 1;
+        opacity: 1;
     }
 `;
 export const UserNav=styled.div`
@@ -76,7 +97,7 @@ export const UserNav=styled.div`
         }     
         ${ProfileTitle}{
             top:65px !important;
-            right:30px !important;
+            right:70px !important;
         }
     }
 `;
@@ -87,6 +108,26 @@ export const AppBar=styled.div`
     align-items:center;
     justify-content: space-between;
     border-bottom: 2px solid rgb(194 194 194 / 50%);
+    &.dark{
+        background-color: #2a2a2a;
+        border-bottom:2px solid rgb(0 0 0 / 25%) ;
+        ${Logo} *{
+            fill: #ddd;
+            stroke:#ddd;
+        }
+        ${Avatar}{
+            outline-color: #784BA0;
+        }
+        a{
+            color: #ddd;
+            ::after{
+                ${darkModeGradient};
+            }
+        }
+        ${MenuIcon},${CloseMenuIcon}{
+            fill:#ddd;
+        }
+    }
     @media screen and (max-width:815px) {
         padding:10px 25px;
         a{
@@ -95,7 +136,7 @@ export const AppBar=styled.div`
         }
         ${ProfileTitle}{
             top:75px;
-            right:7px;
+            right:25px;
             font-size:.75rem;
         }
     }

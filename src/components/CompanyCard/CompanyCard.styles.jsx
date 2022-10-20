@@ -96,4 +96,22 @@ export const Container=styled.div`
     *{
         pointer-events: none;
     }
+    &.dark{
+        background-color: #2d2d2d;
+        border: 1px solid #3a3a3a8a;
+        ${CardHeader}{
+            & .overlay{
+                background-color: #7400da;
+                background-image: radial-gradient(at 47% 33%,hsl(162.00,77%,20%) 0,transparent 50%), radial-gradient(at 82% 65%,hsl(198.00,100%,50%) 0,transparent 75%);
+            }
+        }
+        ${Info}{
+            h2{
+                color: #ddd;
+            }
+            h5{
+                color:#aaa;
+            }
+        }
+    }
 `;

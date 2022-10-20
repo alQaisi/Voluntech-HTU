@@ -1,12 +1,12 @@
 import { Container,Half1,Half2,ProfileImage,ProfileLink } from "./profilecard.styles";
 import { Skill } from "../";
 import { Children } from "react";
-function ProfileCard({id,data}){
+function ProfileCard({id,data,colorMode}){
     const {fName,lName,phone,skills,imagePath,city}=data;
-    const skillsItems=Children.toArray(skills.map(skill=><Skill>{skill}</Skill>));
+    const skillsItems=Children.toArray(skills.map(skill=><Skill colorMode={colorMode}>{skill}</Skill>));
     return(
         <ProfileLink to={`/profiles/${id}`} target="_blank" rel="noopener noreferrer">
-            <Container>
+            <Container className={colorMode}>
                 <Half1>
                     <ProfileImage src={`https://nrhsumqatauurhjsswzq.supabase.co/storage/v1/object/public/avatars/${imagePath}`} alt="user profile" />
                 </Half1>

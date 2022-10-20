@@ -17,4 +17,8 @@ export const CustomSelect=styled.select`
     white-space: nowrap;
     text-overflow: ellipsis;  
     color: white;
+    &.dark{
+        background-color:#784BA0;
+        color: #ddd;
+    }
 `;

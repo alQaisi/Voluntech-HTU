@@ -1,8 +1,8 @@
 import { Container, CompanyName, Title, Info, Half1, Half2,Delete } from "./workExperience.styles";
 import { Fragment } from "react";
-function WorkExperience({id,companyName,city,country,title,startDate,endDate,deleteCallback}){
+function WorkExperience({id,companyName,city,country,title,startDate,endDate,colorMode,deleteCallback}){
     return(
-        <Container>
+        <Container className={colorMode}>
             <Half2/>
             <Half1>
                 <CompanyName>{companyName}</CompanyName>

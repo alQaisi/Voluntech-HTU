@@ -1,13 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import AppC from './ContextComponentSelectors/AppC.component';
+import { Provider } from 'react-redux';
+import { PersistGate } from "redux-persist/integration/react";
+import { store,persistor } from './store/store';
+import AppWrapped from './WrappedComponents/App-Wrapped';
 import * as serviceWorker from './serviceWorkerRegistration';
 // import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AppC />
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <AppWrapped />
+    </PersistGate>
+  </Provider>
 );
 
 serviceWorker.register();

@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState,useEffect } from "react";
 
-function ApplyToActivity({toggleApply,applyToActivity}){
+function ApplyToActivity({toggleApply,colorMode,applyToActivity}){
     useEffect(()=>{
         window.scrollTo({
             top: 0,
@@ -24,7 +24,6 @@ function ApplyToActivity({toggleApply,applyToActivity}){
     function onSubmit(evt){
         evt.preventDefault();
         applyToActivity(data);
-        toggleApply();
     }
     useEffect(()=>{
         const formatedSD=startDate?.toLocaleDateString();
@@ -33,10 +32,10 @@ function ApplyToActivity({toggleApply,applyToActivity}){
         //eslint-disable-next-line
     },[startDate,endDate]);
     return(
-        <ApplyContainer>
+        <ApplyContainer className={colorMode}>
             <form onSubmit={onSubmit}>
                 <CloseIcon onClick={toggleApply}/>
-                <TextArea name="notes" placeholder="Why are you interested in this activity? (350 characters max)" label="description" maxLength="350" required onChange={handleInputChange}/>
+                <TextArea colorMode={colorMode} name="notes" placeholder="Why are you interested in this activity? (350 characters max)" label="description" maxLength="350" required onChange={handleInputChange}/>
                 <DatePicker
                     className="datePicker"
                     placeholderText="Select Available Date"
@@ -50,7 +49,7 @@ function ApplyToActivity({toggleApply,applyToActivity}){
                     required
                     withPortal
                 />
-                <Input type="submit" label="submit"/>
+                <Input colorMode={colorMode} type="submit" label="submit"/>
             </form>
         </ApplyContainer>
     );

@@ -87,6 +87,21 @@ export const Container=styled.div`
     & *{
         pointer-events: none;
     }
+    &.dark{
+        background-color: #2d2d2d;
+        border: 1px solid #3a3a3a8a;
+        ${Half1},${ProfileImage}{
+            background-color:#784BA0;
+        }
+        ${Half2}{
+            h2{
+                color: #ddd;
+            }
+            h5{
+                color: #aaa;
+            }
+        }
+    }
     @media screen and (max-width:835px){
         flex-direction: column;
         ${Half1},${Half2}{

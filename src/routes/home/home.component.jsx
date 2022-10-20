@@ -1,8 +1,12 @@
-import { HomeCont,MainHeading,MainText,GridMenu,GridItem } from './home.styles';
+import { HomeCont,SpaceFill,MainHeading,MainText,GridMenu,GridItem } from './home.styles';
 import { Children } from 'react';
 import { mobile, websites, hardware, data, design } from "../../assets";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { selectColorMode } from "../../store/ui/ui.selectors";
+
 function Home(){
+    const colorMode=useSelector(selectColorMode);
     let navigate = useNavigate();
     function handleClick(evt){
         const path=`/activities/${evt.target.dataset.page}`
@@ -18,7 +22,8 @@ function Home(){
         </GridItem>
     )));
     return(
-        <HomeCont>
+        <HomeCont className={colorMode}>
+            <SpaceFill/>
             <MainHeading>Are you a technical specialist?</MainHeading>
             <MainText>Volunteer in some activities to gain more experience and help develop the community.</MainText>
             <GridMenu>

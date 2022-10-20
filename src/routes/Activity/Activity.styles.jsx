@@ -75,6 +75,12 @@ export const ApplyContainer=styled.div`
         align-items: center;
         justify-content: center;
     }
+    &.dark{
+        background-color: #4b4b4b58;
+        & form{
+            background-color: #2a2a2a;
+        }
+    }
 `;
 export const Container=styled.div`
     position: relative;
@@ -107,6 +113,32 @@ export const Container=styled.div`
             text-transform: uppercase;
             letter-spacing: 3px;
             width: fit-content;
+        }
+    }
+    &.dark{
+        background-color: #2a2a2a;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23dddddd' fill-opacity='0.06' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+        ${Logo}{
+            outline: 5px solid #784BA0;
+        }
+        a{
+            color:#bde3ff;
+            :after{
+                background-color: #FF3CAC;
+                background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+            }
+        }
+        ${Title}{
+            color:#ddd;
+        }
+        ${ActivityBreif}{
+            background-color:#784BA0;
+        }
+        ${IconCont}{
+            color:#aaa;
+        }
+        .actStatus{
+            color: #aaa !important;
         }
     }
 `;

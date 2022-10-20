@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { useNavigate } from "react-router";
 import { Container, Avatar, Title, Notes, ToggleNotes, UserIcon, ActivityIcon, DeleteIcon, ApproveIcon, Link, Date, Status } from "./applicant.styles";
 
-function Applicant({actData,deleteCallBack,approveCallBack}){
+function Applicant({actData,colorMode,deleteCallBack,approveCallBack}){
     const {id,uid,aid,title,data,status}=actData;
     const navigate=useNavigate();
     const [textSize,setTextSize]=useState("small");
@@ -10,7 +10,7 @@ function Applicant({actData,deleteCallBack,approveCallBack}){
         return textSize==="small"?setTextSize("large"):setTextSize("small");
     }
     return (
-        <Container className={deleteCallBack?"extend":""}>
+        <Container className={deleteCallBack?`extend ${colorMode}`:`${colorMode}`}>
             <div className="first-line">
                 <Avatar src={`https://nrhsumqatauurhjsswzq.supabase.co/storage/v1/object/public/avatars/${actData.userImage || data.userImage}`} alt="user avatar" />
                 <Title>{title}</Title>

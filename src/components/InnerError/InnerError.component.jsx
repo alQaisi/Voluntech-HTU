@@ -1,9 +1,9 @@
 import { Container } from "./InnerError.styles";
 import { ReactComponent as ErrorSvg } from "../../assets/InnerError.svg";
 
-function InnerError(){
+function InnerError({colorMode}){
     return(
-        <Container>
+        <Container className={colorMode}>
             <ErrorSvg/>
         </Container>
     );

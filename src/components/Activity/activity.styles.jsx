@@ -96,6 +96,28 @@ export const Container=styled.div`
             height:12px;
         }
     }
+    &.dark{
+        background-color: #2d2d2d;
+        border: 1px solid #3a3a3a8a;
+        box-shadow:unset;
+        ${Overlay}{
+            background-color: #FF3CAC;
+            background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        }
+        ${InfoBig}{
+            color: #ddd;
+        }
+        ${InfoSmall}{
+            color:#aaa;
+        }
+        ${ManageIcon},${ManageIcon}+svg{
+            color:#aaa;
+            :hover{
+                opacity: 1;
+                color:#ddd;
+            }
+        }
+    }
 `;
 export const ActivityLink=styled(Link)`
     all:unset;

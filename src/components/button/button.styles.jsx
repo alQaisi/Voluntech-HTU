@@ -21,4 +21,14 @@ export const Button=styled.button`
         background-image: unset;
         color: hsl(162.00,77%,40%);
     }
+    &.dark{
+        background-color: #784BA0 ;
+        background-image: linear-gradient(225deg,#784BA0 50%, #2B86C5 100%);
+        color: #ddd;
+        :hover{
+            background-image: unset;
+            background-color:#2a2a2a;
+            border-color:#784BA0;
+        }
+    }
 `;

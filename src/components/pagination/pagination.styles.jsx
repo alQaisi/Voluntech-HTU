@@ -34,4 +34,19 @@ export const Container=styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &.dark{
+        ${Next},${Previous}{
+            background-color: #FF3CAC;
+            background-image: linear-gradient(225deg, #FF3CAC 0%, #2B86C5 100%);
+            polyline{
+                stroke: #ddd;
+            }
+            :hover{
+                filter: brightness(125%);
+            }
+        }
+        ${PageNumber}{
+            color: #ddd;
+        }
+    }
 `;

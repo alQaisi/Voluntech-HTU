@@ -136,4 +136,31 @@ export const Container=styled.div`
     &.extend{
         padding-bottom: 65px !important;
     }
+    &.dark{
+        background-color: #303030;
+        box-shadow:none;
+        border:1px solid #47474789;
+        ${Avatar}{
+            border-color:#784BA0;
+        }
+        h3{
+            color:#ddd;
+        }
+        p,span{
+            color:#aaa;
+        }
+        ${Link}{
+            color: #aaa;
+            &:hover,&:hover *{
+                color:#fff;
+            }
+        }
+        ${DeleteIcon},${ApproveIcon}{
+            color:#aaa;
+            :hover{
+                color:#ddd;
+            }
+        }
+
+    }
 `;

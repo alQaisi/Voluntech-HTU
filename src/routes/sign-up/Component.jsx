@@ -2,10 +2,10 @@ import {SignUpCont,SignType,UserIcon,CompanyIcon} from './signup.styles';
 import { useNavigate } from 'react-router';
 import { AuthPagesLogo } from "../../components";
 
-export function Component(){
+export function Component({colorMode}){
     const navigate=useNavigate();
     return(
-        <SignUpCont>
+        <SignUpCont className={colorMode}>
             <AuthPagesLogo path=""/>
             <div className="typesCont">
                 <SignType onClick={()=>navigate("signup-companies")}>

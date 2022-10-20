@@ -23,4 +23,13 @@ export const Container=styled.div`
     label{
         margin: 15px;
     }
+    &.dark{
+        background-color: #2a2a2a;
+        p{
+            color:#aaa;
+        }
+        h1,h2{
+            color: #ddd;
+        }
+    }
 `

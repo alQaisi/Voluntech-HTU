@@ -1,10 +1,9 @@
-import {useContext} from "react";
-import { UserContext } from "../../context/user.context";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { OuterLoading } from '../../components'
 
 function ProtectedRoute({children}){
-    const {user}=useContext(UserContext); 
+    const user=useSelector(state=>state.user.user);
       if(user===undefined)
         return <OuterLoading type="white"/>
       if(user===null)

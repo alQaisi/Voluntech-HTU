@@ -2,7 +2,7 @@ import { AddWorkCont,CloseIcon } from "./userDashboard.styles";
 import { Input, DatePicker } from "../../components";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState,useEffect } from "react";
-function AddWork({toggleAddWork,updateWorkExperience,workExp}){
+function AddWork({toggleAddWork,colorMode,updateWorkExperience,workExp}){
     const [dateRange,setDateRange]=useState([null,null]);
     const [startDate,endDate]=dateRange;
     
@@ -23,13 +23,13 @@ function AddWork({toggleAddWork,updateWorkExperience,workExp}){
         //eslint-disable-next-line
     },[startDate,endDate])
     return(
-        <AddWorkCont>
+        <AddWorkCont className={colorMode}>
             <form onSubmit={onSubmit}>
                 <CloseIcon onClick={()=>toggleAddWork(false)}/>
-                <Input type="text" name="cName" label="company name" placeholder="Company Name" onChange={handleInputChange} required/>
-                <Input type="text" name="title" label="Job title" placeholder="Job title" onChange={handleInputChange} required/>
-                <Input type="text" name="country" label="Country" placeholder="Country" onChange={handleInputChange} required/>
-                <Input type="text" name="city" label="City" placeholder="City" onChange={handleInputChange} required/>
+                <Input className={colorMode} type="text" name="cName" label="company name" placeholder="Company Name" onChange={handleInputChange} required/>
+                <Input className={colorMode} type="text" name="title" label="Job title" placeholder="Job title" onChange={handleInputChange} required/>
+                <Input className={colorMode} type="text" name="country" label="Country" placeholder="Country" onChange={handleInputChange} required/>
+                <Input className={colorMode} type="text" name="city" label="City" placeholder="City" onChange={handleInputChange} required/>
                 <DatePicker
                     className="datePicker"
                     placeholderText="Select Date"
@@ -43,7 +43,7 @@ function AddWork({toggleAddWork,updateWorkExperience,workExp}){
                     required
                     withPortal
                 />
-                <Input type="submit" label="submit"/>
+                <Input className={colorMode} type="submit" label="submit"/>
             </form>
         </AddWorkCont>
     );

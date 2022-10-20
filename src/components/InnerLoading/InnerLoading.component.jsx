@@ -1,9 +1,9 @@
 import { Container } from "./InnerLoading.styles";
 import Loader from "../Loader/Loader.component";
 
-function InnerLoading(){
+function InnerLoading({colorMode}){
     return(
-        <Container><Loader/></Container>
+        <Container className={colorMode}><Loader/></Container>
     );
 }
 export default InnerLoading;
