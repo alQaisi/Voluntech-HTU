@@ -61,7 +61,7 @@ export async function update(id,authData,data,imageFile){
         .update({data:data})
         .match({id:id});
     if(error2)
-        throw error
+        throw error2;
     if(imageFile){
         let { error: uploadError } = await supabase.storage.from('avatars').upload(data.imagePath,imageFile);
         if (uploadError) {
@@ -72,10 +72,24 @@ export async function update(id,authData,data,imageFile){
         user,newData
     };
 }
+
+export async function updateUserData(id,newData){
+    const { data:metadata, error } = await supabase.auth.update({data:newData});
+    if(error)
+        throw error;
+    const { data,error:error2 }=await supabase
+        .from("Profile")
+        .update({data:newData})
+        .match({id:id});
+    if(error2)
+        throw error2;
+    return {metadata,data};
+}
+
 export async function getProfile(userId){
     const { data, error } = await supabase
         .from('Profile')
-        .select('type,data')
+        .select('id,type,data')
         .eq("id",userId);
     if(error)
         throw error;
