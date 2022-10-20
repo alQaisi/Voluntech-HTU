@@ -8,7 +8,6 @@ import { rootReducers } from "./root-reducers";
 const middleWares=[process.env.NODE_ENV!=="production" && logger,thunk].filter(Boolean);
 const composeEnhancer=(process.env.NODE_ENV!=="production" && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ) || compose;
 const composeMiddlewars=composeEnhancer(applyMiddleware(...middleWares));
-
 const persistConfig={
     key:"root",
     storage,
