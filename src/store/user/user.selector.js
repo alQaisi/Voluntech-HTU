@@ -21,3 +21,7 @@ export function selectErrorMessage(state){
 export function selectImageUrl(state){
     return state.user.imageUrl;
 }
+
+export function selectUserType(state){
+    return state.user.user?.user_metadata.type;
+}
