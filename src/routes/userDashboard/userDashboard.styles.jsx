@@ -1,5 +1,6 @@
 import styled,{css} from "styled-components";
 import { AiOutlineClose } from "react-icons/ai";
+import { NavLink } from "react-router-dom";
 
 const Background=css`
     margin-top:-110px;
@@ -15,7 +16,8 @@ const DarkBackground=css`
     background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23dddddd' fill-opacity='0.02' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E");
 `;
 
-export const NavItem=styled.span`
+export const NavItem=styled(NavLink)`
+    all:unset;
     font-size:1.15rem;
     color: #8f8e8e;
     &.active,&:hover{

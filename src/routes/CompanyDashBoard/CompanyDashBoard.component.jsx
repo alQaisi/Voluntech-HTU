@@ -9,8 +9,10 @@ import { setErrorMessage } from "../../store/user/user.actions";
 import { selectUser } from "../../store/user/user.selector";
 import { useSelector,useDispatch } from "react-redux";
 import { selectColorMode } from "../../store/ui/ui.selectors";
+import useDocumentTitle from '../../utils/useDocumentTitle';
 
 function CompanyDashboard(){
+    useDocumentTitle("Dahsboard");
     const dispatch=useDispatch();
     const colorMode=useSelector(selectColorMode);
     const user=useSelector(selectUser);
