@@ -1,5 +1,5 @@
 import { createAction } from "../../utils/reducer.utils";
-import { getUserActivities as getUserActivitiesHelper, deleteUserActivity as deleteUserActivityHelper } from "../../utils/supabase.utils";
+import { updateUserData as updateUserWorkExp,getUserActivities as getUserActivitiesHelper, deleteUserActivity as deleteUserActivityHelper } from "../../utils/supabase.utils";
 import { setOuterLoadingType,setErrorMessage,setMultipleValues } from "../../store/user/user.actions";
 
 export function setWorkExp(payload){
@@ -44,4 +44,23 @@ export function getUserActivitiesAsync(userId){
 
 export function resetUserActivities(){
     return createAction("RESET_USER_ACTIVITIES");
+}
+
+export function resetUserWork(){
+    return createAction("RESET_USER_WORK");
+}
+
+export function updateUserWork(newWorkExp,user){
+    return async function(dispatch){
+        const newData={...user.user_metadata,...{workExp:newWorkExp}};
+        try{
+            dispatch(setOuterLoadingType("normal"));
+            await updateUserWorkExp(user.id,newData);
+            dispatch(setWorkExp(newWorkExp));
+        }catch(err){
+            dispatch(setErrorMessage(err));
+        }finally{
+            dispatch(setOuterLoadingType());
+        }
+    }
 }
