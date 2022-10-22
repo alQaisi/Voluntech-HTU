@@ -1,5 +1,5 @@
 import { Children,useEffect,Fragment } from "react";
-import { deleteUserActivitiesAsync,getUserActivitiesAsync } from "../../store/userDashboard/userDashboard.actions.js";
+import { resetUserActivities,deleteUserActivitiesAsync,getUserActivitiesAsync } from "../../store/userDashboard/userDashboard.actions.js";
 import { selectUserActivities } from "../../store/userDashboard/userDashboard.selectors.js";
 import { selectUser } from "../../store/user/user.selector";
 import { useSelector,useDispatch } from "react-redux";
@@ -18,7 +18,10 @@ function UserActivities({colorMode}){
     useEffect(()=>{
         let cleanUp=false;
         !cleanUp && dispatch(getUserActivitiesAsync(user.id));
-        return ()=>cleanUp=true;
+        return ()=>{
+            cleanUp=true;
+            dispatch(resetUserActivities());
+        };
         //eslint-disable-next-line
     },[])
     const userImage=user.user_metadata.imagePath;

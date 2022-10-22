@@ -12,8 +12,6 @@ export const UserDashboardReducer=function(state=INITIAL_STATE,action){
             return { ...state,activities:payload };
         case "RESET_USER_ACTIVITIES":
             return { ...state,activities:undefined };
-        case "SET_USER_DATA":
-            return { workExp:undefined,activities:undefined };
         default:
             return state;
     }
